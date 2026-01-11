@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "410790387188",
+    "project_id": "clothing-ecommerce-747d8",
+    "storage_bucket": "clothing-ecommerce-747d8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:410790387188:android:0347d9382161215c85eda1",
+        "android_client_info": {
+          "package_name": "com.example.clothing_ecommerce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "410790387188-3k9f1v4sdkvejrlvue7gd08dfpobp3nn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEVB_7FYJ1loaSDiqpJVFH-f66-D6cHXQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "410790387188-3k9f1v4sdkvejrlvue7gd08dfpobp3nn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
