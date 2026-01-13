@@ -28,9 +28,9 @@ class AuthServicesImpl extends AuthServices {
 
   @override
   Future<bool> checkEmailVerification() async {
-    final User user = _firebaseAuth.currentUser!;
-    await user.reload();
-    return user.emailVerified;
+    await _firebaseAuth.currentUser!.reload();
+    final newUser = _firebaseAuth.currentUser!;
+    return newUser.emailVerified;
   }
 
   @override

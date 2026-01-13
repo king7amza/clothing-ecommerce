@@ -112,11 +112,13 @@ class _SignUpPageState extends State<SignUpPage> {
                       context,
                     ).showSnackBar(SnackBar(content: Text(state.message)));
                   } else if (state is SignUpSuccess) {
-                    Navigator.pushNamed(context, '/verfiyEmail');
+                    Navigator.pushNamed(context, '/verifyEmail');
                   }
                 },
                 buildWhen: (previous, current) =>
-                    current is SignUpLoading || current is SignUpSuccess,
+                    current is SignUpLoading ||
+                    current is SignUpSuccess ||
+                    current is SignUpError,
                 builder: (context, state) {
                   if (state is SignUpLoading) {
                     return CustomMainButton(isLoading: true);
