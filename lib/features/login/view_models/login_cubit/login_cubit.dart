@@ -16,10 +16,15 @@ class LoginCubit extends Cubit<LoginState> {
       email,
       password,
     );
-    emit(LoginLoading());
+    final bool isEmailVerified = await _authServices.checkEmailVerification();
     try {
       if (isLoggedIn) {
-        emit(LoginSuccess());
+        if (isEmailVerified) {
+          emit(LoginSuccess());
+        } else {
+          await _authServices.sendEmailVerification();
+          emit(EmailNotVerified("email is not verified"));
+        }
       } else {
         emit(LoginError("this email is not registered"));
       }

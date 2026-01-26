@@ -1,4 +1,4 @@
-import 'package:clothing_ecommerce/core/common/common_widgets/custom_main_button.dart';
+import 'package:clothing_ecommerce/core/common/common_widgets/custom_main_button_widget.dart';
 import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:clothing_ecommerce/core/common/common_widgets/custom_text_field_widget.dart';
 import 'package:clothing_ecommerce/features/login/view_models/login_cubit/login_cubit.dart';
@@ -22,13 +22,13 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: AppColors.lightGrey,
+        backgroundColor: AppColors.lightGrey3,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: AppColors.black),
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      backgroundColor: AppColors.lightGrey,
+      backgroundColor: AppColors.lightGrey3,
       body: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: size.width * 0.08,
@@ -83,7 +83,9 @@ class _LoginPageState extends State<LoginPage> {
             BlocConsumer<LoginCubit, LoginState>(
               bloc: loginCubit,
               listenWhen: (previous, current) =>
-                  current is LoginError || current is LoginSuccess,
+                  current is LoginError ||
+                  current is LoginSuccess ||
+                  current is EmailNotVerified,
               listener: (context, state) {
                 if (state is LoginError) {
                   ScaffoldMessenger.of(
@@ -94,15 +96,20 @@ class _LoginPageState extends State<LoginPage> {
                     context,
                   ).showSnackBar(SnackBar(content: Text("Login Success")));
                   Navigator.pushNamed(context, '/home');
+                } else if (state is EmailNotVerified) {
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(SnackBar(content: Text(state.message)));
+                  Navigator.pushNamed(context, '/verifyEmail');
                 }
               },
               buildWhen: (previous, current) =>
                   current is LoginLoading || current is LoginSuccess,
               builder: (context, state) {
                 if (state is LoginLoading) {
-                  return const CustomMainButton(isLoading: true);
+                  return const CustomMainButtonWidget(isLoading: true);
                 }
-                return CustomMainButton(
+                return CustomMainButtonWidget(
                   title: "Login",
                   onTap: () {
                     loginCubit.loginWithEmailAndPassword(

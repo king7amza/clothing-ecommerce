@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Clothing Ecommerce',
       theme: ThemeData(primarySwatch: Colors.blue),
-      initialRoute: '/signup',
+      initialRoute: '/bottomNavBar',
       onGenerateRoute: AppRouter.onGenerateRoute,
     );
   }

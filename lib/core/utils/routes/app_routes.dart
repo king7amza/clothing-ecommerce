@@ -4,4 +4,6 @@ class AppRoutes {
   static const home = '/home';
   static const verfiyEmail = '/verifyEmail';
   static const afterVerifyingEmail = '/afterVerifyingEmail';
+  static const bottomNavBar = '/bottomNavBar';
+  static const shop = '/shop';
 }

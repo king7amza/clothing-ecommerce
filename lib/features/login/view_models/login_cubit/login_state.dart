@@ -12,3 +12,8 @@ final class LoginError extends LoginState {
   final String message;
   LoginError(this.message);
 }
+
+final class EmailNotVerified extends LoginState {
+  final String message;
+  EmailNotVerified(this.message);
+}

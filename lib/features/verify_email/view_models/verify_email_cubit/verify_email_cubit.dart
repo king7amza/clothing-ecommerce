@@ -31,18 +31,4 @@ class VerifyEmailCubit extends Cubit<VerifyEmailState> {
     _successTimer?.cancel();
     return super.close();
   }
-
-  Future<void> checkEmailVerification() async {
-    emit(CheckEmailVerificationLoading());
-    try {
-      final bool isEmailVerified = await _authServices.checkEmailVerification();
-      if (isEmailVerified) {
-        emit(CheckEmailVerificationSuccess());
-      } else {
-        emit(CheckEmailVerificationError("Email is not verified"));
-      }
-    } catch (e) {
-      emit(CheckEmailVerificationError(e.toString()));
-    }
-  }
 }
