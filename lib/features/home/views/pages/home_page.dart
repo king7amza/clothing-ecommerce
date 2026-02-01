@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
             Stack(
               children: [
                 Image.asset(
-                  'assets/images/Big Banner.png',
+                  'assets/images/big_banner.png',
                   fit: BoxFit.cover,
                   width: double.infinity,
                   height: size.height * 0.7,

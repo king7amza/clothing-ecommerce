@@ -1,4 +1,4 @@
-import 'package:clothing_ecommerce/features/home/models/clothes_response_model.dart';
+import 'package:clothing_ecommerce/core/common/common_models/clothes_response_model.dart';
 
 extension ProductExtensions on Products {
   bool get isNew {

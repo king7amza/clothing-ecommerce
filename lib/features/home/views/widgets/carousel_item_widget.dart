@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
-import 'package:clothing_ecommerce/features/home/models/clothes_response_model.dart';
+import 'package:clothing_ecommerce/core/common/common_models/clothes_response_model.dart';
 import 'package:clothing_ecommerce/features/home/models/product_extinsion.dart';
 import 'package:flutter/material.dart';
 

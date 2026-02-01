@@ -3,6 +3,8 @@ import 'package:clothing_ecommerce/core/common/common_pages/bottom_nav_bar_page.
 import 'package:clothing_ecommerce/features/home/views/pages/home_page.dart';
 import 'package:clothing_ecommerce/features/login/view_models/login_cubit/login_cubit.dart';
 import 'package:clothing_ecommerce/features/login/views/pages/login_pgae.dart';
+import 'package:clothing_ecommerce/features/shop/view_models/shop_cubit/shop_cubit.dart';
+import 'package:clothing_ecommerce/features/shop/views/pages/catalog_page.dart';
 import 'package:clothing_ecommerce/features/shop/views/pages/shop_page.dart';
 import 'package:clothing_ecommerce/features/sign_up/view_models/sign_up_cubit/sign_up_cubit.dart';
 import 'package:clothing_ecommerce/features/sign_up/views/pages/sign_up_page.dart';
@@ -47,6 +49,17 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const HomePage());
       case "/shop":
         return MaterialPageRoute(builder: (_) => const ShopPage());
+      case "/catalog":
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) {
+              final shopCubit = ShopCubit();
+              shopCubit.loadPage(20, 0);
+              return shopCubit;
+            },
+            child: const CatalogPage(),
+          ),
+        );
       default:
         return MaterialPageRoute(builder: (_) => const NotFoundPage());
     }

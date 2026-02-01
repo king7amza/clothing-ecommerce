@@ -21,8 +21,10 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
     BlocProvider(
       create: (context) {
         final cubit = HomeCubit();
-        cubit.fetchMensShirt();
-        cubit.fetchWomensDresses();
+        Future.microtask(() async {
+          await cubit.fetchWomensDresses();
+          await cubit.fetchMensShirt();
+        });
         return cubit;
       },
       child: const HomePage(),
