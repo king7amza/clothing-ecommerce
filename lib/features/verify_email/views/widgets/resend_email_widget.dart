@@ -18,11 +18,11 @@ class ResendEmailWidget extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(8),
-        width: size.width * 0.4,
+        padding:  EdgeInsets.all(size.height * 0.017),
+        width: size.width * 0.55,
         decoration: BoxDecoration(
           color: AppColors.white,
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(size.height * 0.02),
         ),
         child: isLoading
             ? Center(

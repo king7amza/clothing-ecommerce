@@ -7,7 +7,7 @@ class NotFoundPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.lightGrey,
+      backgroundColor: AppColors.lightGrey3,
       body: Center(
         child: Text(
           'Error Not Found',

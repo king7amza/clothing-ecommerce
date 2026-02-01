@@ -1,11 +1,11 @@
 import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class CustomMainButton extends StatelessWidget {
+class CustomMainButtonWidget extends StatelessWidget {
   final String? title;
   final bool? isLoading;
   final VoidCallback? onTap;
-  const CustomMainButton({
+  const CustomMainButtonWidget({
     super.key,
     this.title,
     this.isLoading = false,

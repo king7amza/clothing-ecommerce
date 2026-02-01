@@ -1,5 +1,5 @@
 import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
-import 'package:clothing_ecommerce/core/common/common_widgets/custom_main_button.dart';
+import 'package:clothing_ecommerce/core/common/common_widgets/custom_main_button_widget.dart';
 import 'package:clothing_ecommerce/core/common/common_widgets/custom_text_field_widget.dart';
 import 'package:clothing_ecommerce/features/sign_up/view_models/sign_up_cubit/sign_up_cubit.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +45,7 @@ class _SignUpPageState extends State<SignUpPage> {
       },
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: AppColors.lightGrey,
+        backgroundColor: AppColors.lightGrey3,
         body: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: size.width * 0.08,
@@ -112,16 +112,18 @@ class _SignUpPageState extends State<SignUpPage> {
                       context,
                     ).showSnackBar(SnackBar(content: Text(state.message)));
                   } else if (state is SignUpSuccess) {
-                    Navigator.pushNamed(context, '/verfiyEmail');
+                    Navigator.pushNamed(context, '/verifyEmail');
                   }
                 },
                 buildWhen: (previous, current) =>
-                    current is SignUpLoading || current is SignUpSuccess,
+                    current is SignUpLoading ||
+                    current is SignUpSuccess ||
+                    current is SignUpError,
                 builder: (context, state) {
                   if (state is SignUpLoading) {
-                    return CustomMainButton(isLoading: true);
+                    return CustomMainButtonWidget(isLoading: true);
                   }
-                  return CustomMainButton(
+                  return CustomMainButtonWidget(
                     title: "Sign Up",
                     onTap: () {
                       signUpCubit.signUpWithEmailAndPassword(
