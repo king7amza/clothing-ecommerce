@@ -69,7 +69,6 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
     final size = MediaQuery.sizeOf(context);
     return Scaffold(
       body: pages[currentIndex],
-      // body: _buildCurrentPage(),
       bottomNavigationBar: BottomNavigationBar(
         onTap: changePage,
         currentIndex: currentIndex,

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:clothing_ecommerce/core/common/common_services/auth_services.dart';
+import 'package:clothing_ecommerce/features/auth/services/auth_services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'verify_email_state.dart';

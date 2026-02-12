@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
-import 'package:clothing_ecommerce/features/verify_email/view_models/verify_email_cubit/verify_email_cubit.dart';
-import 'package:clothing_ecommerce/features/verify_email/views/widgets/resend_email_widget.dart';
+import 'package:clothing_ecommerce/features/auth/services/auth_services.dart';
+import 'package:clothing_ecommerce/features/auth/view_models/verify_email_cubit/verify_email_cubit.dart';
+import 'package:clothing_ecommerce/features/auth/views/widgets/resend_email_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,27 +15,38 @@ class VerifyEmailWatingPage extends StatefulWidget {
   State<VerifyEmailWatingPage> createState() => _VerifyEmailWatingPageState();
 }
 
-class _VerifyEmailWatingPageState extends State<VerifyEmailWatingPage>
-    with WidgetsBindingObserver {
+class _VerifyEmailWatingPageState extends State<VerifyEmailWatingPage> {
   late VerifyEmailCubit _verifyEmailCubit;
+  Timer? _verificationTimer;
 
   @override
   void initState() {
     super.initState();
     _verifyEmailCubit = BlocProvider.of<VerifyEmailCubit>(context);
-    WidgetsBinding.instance.addObserver(this);
+    _startVerificationPolling();
   }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) {
-      Navigator.pushNamed(context, '/afterVerifyingEmail');
-    }
+  void _startVerificationPolling() {
+    _verificationTimer = Timer.periodic(const Duration(seconds: 2), (_) async {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user == null) {
+        _verificationTimer?.cancel();
+        return;
+      }
+      try {
+        final AuthServices authServices = AuthServicesImpl();
+        final isVerified = await authServices.checkEmailVerification();
+        if (isVerified) {
+          _verificationTimer?.cancel();
+          if (!mounted) return;
+          Navigator.pushNamedAndRemoveUntil(context, '/bottomNavBar', (route) => false);
+        }
+      } catch (_) {}
+    });
   }
 
   @override
   void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
+    _verificationTimer?.cancel();
     super.dispose();
   }
 
