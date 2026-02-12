@@ -1,7 +1,7 @@
 import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:clothing_ecommerce/core/common/common_widgets/custom_main_button_widget.dart';
 import 'package:clothing_ecommerce/core/common/common_widgets/custom_text_field_widget.dart';
-import 'package:clothing_ecommerce/features/sign_up/view_models/sign_up_cubit/sign_up_cubit.dart';
+import 'package:clothing_ecommerce/features/auth/view_models/sign_up_cubit/sign_up_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -129,6 +129,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       signUpCubit.signUpWithEmailAndPassword(
                         email: _emailController.text,
                         password: _passwordController.text,
+                        name: _nameController.text,
                       );
                     },
                   );

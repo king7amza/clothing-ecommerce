@@ -20,6 +20,7 @@ class _CatalogPageState extends State<CatalogPage> {
   int resultsPerPage = 4;
   @override
   Widget build(BuildContext context) {
+    print("🎨 CatalogPage BUILD called");
     final size = MediaQuery.sizeOf(context);
     final shopCubit = context.read<ShopCubit>();
     int numberOfButtonsPerPage = ((size.width - 150) / 60).floor();
@@ -47,7 +48,9 @@ class _CatalogPageState extends State<CatalogPage> {
             current is ErrorFetchingProducts ||
             current is FetchingProducts,
         builder: (context, state) {
+          print("🔄 BlocBuilder state: ${state.runtimeType}");
           if (state is FetchingProducts) {
+            print("⏳ Showing loading...");
             return const Center(
               child: CircularProgressIndicator(color: AppColors.primaryColor),
             );
@@ -55,6 +58,7 @@ class _CatalogPageState extends State<CatalogPage> {
             return Center(child: Text(state.errorMessage));
           }
           if (state is FetchedProducts) {
+             print("📊 Got  total=${state.totalProducts}, pages=${state.pageCache.keys}");
             _totalProducts = state.totalProducts;
             pageCache = state.pageCache;
             currentPageData = state.pageCache[currentPage];
