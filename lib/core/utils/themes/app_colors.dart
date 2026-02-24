@@ -5,6 +5,7 @@ class AppColors {
   static Color lightGrey2 = Colors.grey.shade200;
   static Color lightGrey3 = Colors.grey.shade300;
   static const Color grey = Colors.grey;
+  static Color darkGrey = Colors.grey.shade600;
   static const Color white = Colors.white;
   static const Color gold = Colors.amber;
   static const Color primaryColor = Color(0xFFDB3022);

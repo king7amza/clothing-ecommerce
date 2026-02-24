@@ -18,6 +18,11 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
+  flutter_map: ^8.2.2
+  geocoding: ^4.0.0
+  geolocator: ^14.0.2
+  latlong2: ^0.9.1
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_lints: ^5.0.0
@@ -31,3 +36,4 @@ flutter:
     - assets/images/
     - assets/images/mens_images/
     - assets/images/womens_images/
+    - assets/images/payments_images/

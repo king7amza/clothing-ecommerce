@@ -7,4 +7,9 @@ class AppRoutes {
   static const shop = '/shop';
   static const catalog = '/catalog';
   static const productCard = '/productCard';
+  static const checkout = '/checkout';
+  static const payment = '/payment';
+  static const address = '/address';
+  static const map = '/map';
+  static const success = '/success';
 }

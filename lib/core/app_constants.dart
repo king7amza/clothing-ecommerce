@@ -21,4 +21,5 @@ class FirestoreApiPathes {
   static String user(String userId) => 'users/$userId';
   static String bagItem(String userId, String bagItemId) =>
       'users/$userId/bag/$bagItemId';
+  static String bagItems(String userId) => 'users/$userId/bag';
 }
