@@ -1,9 +1,9 @@
 import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class ModalBottomSheetButton extends StatelessWidget {
+class ModalBottomSheetOpenButton extends StatelessWidget {
   final String? title;
-  const ModalBottomSheetButton({super.key, this.title});
+  const ModalBottomSheetOpenButton({super.key, this.title});
 
   @override
   Widget build(BuildContext context) {

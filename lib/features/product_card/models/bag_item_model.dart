@@ -29,4 +29,18 @@ class BagItemModel {
       selectedColor: map['selectedColor'] as String,
     );
   }
+
+  BagItemModel copyWith({
+    Products? product,
+    int? quantity,
+    String? selectedSize,
+    String? selectedColor,
+  }) {
+    return BagItemModel(
+      product: product ?? this.product,
+      quantity: quantity ?? this.quantity,
+      selectedSize: selectedSize ?? this.selectedSize,
+      selectedColor: selectedColor ?? this.selectedColor,
+    );
+  }
 }

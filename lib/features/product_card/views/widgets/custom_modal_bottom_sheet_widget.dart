@@ -1,7 +1,7 @@
 import 'package:clothing_ecommerce/core/common/common_widgets/custom_main_button_widget.dart';
 import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:clothing_ecommerce/features/product_card/view_models/modal_bottom_sheet_cubit/modal_bottom_sheet_cubit.dart';
-import 'package:clothing_ecommerce/features/product_card/views/widgets/modal_bottom_sheet_button.dart';
+import 'package:clothing_ecommerce/features/product_card/views/widgets/modal_bottom_sheet_open_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -92,7 +92,7 @@ class CustomModalBottomSheetWidget<T> extends StatelessWidget {
           },
         );
       },
-      child: ModalBottomSheetButton(title: title),
+      child: ModalBottomSheetOpenButton(title: title),
     );
   }
 }

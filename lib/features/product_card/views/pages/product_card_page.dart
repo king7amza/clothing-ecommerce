@@ -112,7 +112,7 @@ class ProductCardPage extends StatelessWidget {
                                 .toggleColor(color),
                             itemBuilder: (color) => ModalColorContentWidget(
                               itemColor: color,
-                              // isSelected: isSelected,
+                              
                             ),
                           );
                         } else {

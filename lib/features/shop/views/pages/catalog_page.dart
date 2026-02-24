@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CatalogPage extends StatefulWidget {
-  const CatalogPage({super.key});
+  final String categoryItemName;
+  const CatalogPage({super.key, required this.categoryItemName});
 
   @override
   State<CatalogPage> createState() => _CatalogPageState();
@@ -20,7 +21,6 @@ class _CatalogPageState extends State<CatalogPage> {
   int resultsPerPage = 4;
   @override
   Widget build(BuildContext context) {
-    print("🎨 CatalogPage BUILD called");
     final size = MediaQuery.sizeOf(context);
     final shopCubit = context.read<ShopCubit>();
     int numberOfButtonsPerPage = ((size.width - 150) / 60).floor();
@@ -32,7 +32,7 @@ class _CatalogPageState extends State<CatalogPage> {
       appBar: AppBar(
         backgroundColor: AppColors.lightGrey1,
         title: Text(
-          "Women's Tops",
+          widget.categoryItemName,
           style: Theme.of(context).textTheme.headlineSmall!.copyWith(
             color: AppColors.black,
             fontWeight: FontWeight.w500,
@@ -48,9 +48,7 @@ class _CatalogPageState extends State<CatalogPage> {
             current is ErrorFetchingProducts ||
             current is FetchingProducts,
         builder: (context, state) {
-          print("🔄 BlocBuilder state: ${state.runtimeType}");
           if (state is FetchingProducts) {
-            print("⏳ Showing loading...");
             return const Center(
               child: CircularProgressIndicator(color: AppColors.primaryColor),
             );
@@ -58,7 +56,6 @@ class _CatalogPageState extends State<CatalogPage> {
             return Center(child: Text(state.errorMessage));
           }
           if (state is FetchedProducts) {
-             print("📊 Got  total=${state.totalProducts}, pages=${state.pageCache.keys}");
             _totalProducts = state.totalProducts;
             pageCache = state.pageCache;
             currentPageData = state.pageCache[currentPage];

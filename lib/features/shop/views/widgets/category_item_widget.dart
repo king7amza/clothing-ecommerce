@@ -20,7 +20,7 @@ class CategoryItemWidget extends StatelessWidget {
           final categoryItem = categoryList[index];
           return InkWell(
             onTap: () {
-              Navigator.pushNamed(context, "/catalog");
+              Navigator.pushNamed(context, "/catalog", arguments: categoryItem);
             },
             child: Container(
               margin: EdgeInsets.only(
