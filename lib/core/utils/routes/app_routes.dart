@@ -12,4 +12,6 @@ class AppRoutes {
   static const address = '/address';
   static const map = '/map';
   static const success = '/success';
+  static const orders = '/orders';
+  static const settings = '/settings';
 }

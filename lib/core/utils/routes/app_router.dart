@@ -13,6 +13,8 @@ import 'package:clothing_ecommerce/features/product_card/views/pages/product_car
 import 'package:clothing_ecommerce/features/home/views/pages/home_page.dart';
 import 'package:clothing_ecommerce/features/auth/view_models/login_cubit/login_cubit.dart';
 import 'package:clothing_ecommerce/features/auth/views/pages/login_pgae.dart';
+import 'package:clothing_ecommerce/features/profile/views/pages/my_orders_page.dart';
+import 'package:clothing_ecommerce/features/profile/views/pages/user_settings-page.dart';
 import 'package:clothing_ecommerce/features/shop/models/category_item_model.dart';
 import 'package:clothing_ecommerce/features/shop/view_models/shop_cubit/shop_cubit.dart';
 import 'package:clothing_ecommerce/features/shop/views/pages/catalog_page.dart';
@@ -54,8 +56,12 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const HomePage());
       case "/shop":
         return MaterialPageRoute(builder: (_) => const ShopPage());
+      case "/orders":
+        return MaterialPageRoute(builder: (_) => const MyOrdersPage());
       case "/success":
         return MaterialPageRoute(builder: (_) => const SuccessShippingPage());
+      case "/settings":
+        return MaterialPageRoute(builder: (_) => const UserSettingsPage());
       case "/productCard":
         final product = settings.arguments as Products?;
         return MaterialPageRoute(
