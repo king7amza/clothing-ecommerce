@@ -1,5 +1,6 @@
 import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:clothing_ecommerce/features/bag/views/pages/bag_page.dart';
+import 'package:clothing_ecommerce/features/favorites/view_models/favorites_cubit/favorites_cubit.dart';
 import 'package:clothing_ecommerce/features/favorites/views/pages/favorites_page.dart';
 import 'package:clothing_ecommerce/features/home/view_models/home_cubit/home_cubit.dart';
 import 'package:clothing_ecommerce/features/home/views/pages/home_page.dart';
@@ -31,7 +32,10 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
     ),
     const ShopPage(),
     const BagPage(),
-    const FavoritesPage(),
+    BlocProvider(
+      create: (context) => FavoritesCubit()..fetchFavoritesItems(),
+      child: const FavoritesPage(),
+    ),
     const ProfilePage(),
   ];
   // Widget _buildCurrentPage() {

@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:clothing_ecommerce/features/bag/view_models/change_quantity_cubit/change_quantity_cubit.dart';
 import 'package:clothing_ecommerce/features/bag/views/widgets/icon_quantity_button_widget.dart';
-import 'package:clothing_ecommerce/features/bag/views/widgets/lable_value_row_widget.dart';
+import 'package:clothing_ecommerce/core/common/common_widgets/lable_value_row_widget.dart';
 import 'package:clothing_ecommerce/features/product_card/models/bag_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

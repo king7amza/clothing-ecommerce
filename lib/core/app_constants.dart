@@ -22,4 +22,7 @@ class FirestoreApiPathes {
   static String bagItem(String userId, String bagItemId) =>
       'users/$userId/bag/$bagItemId';
   static String bagItems(String userId) => 'users/$userId/bag';
+  static String favoriteItem(String userId, String favoriteItemId) =>
+      'users/$userId/favorites/$favoriteItemId';
+  static String favoriteItems(String userId) => 'users/$userId/favorites';
 }
