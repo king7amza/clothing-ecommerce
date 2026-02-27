@@ -18,7 +18,10 @@ class AddNewCardTextFieldWidget extends StatelessWidget {
     return TextField(
       controller: controller,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+        contentPadding: EdgeInsets.symmetric(
+          horizontal: size.width * 0.05,
+          vertical: size.height * 0.01,
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(size.width * 0.02),
           borderSide: BorderSide.none,

@@ -95,7 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                   ScaffoldMessenger.of(
                     context,
                   ).showSnackBar(SnackBar(content: Text("Login Success")));
-                  Navigator.pushNamed(context, '/home');
+                  Navigator.pushNamed(context, '/bottomNavBar');
                 } else if (state is EmailNotVerified) {
                   ScaffoldMessenger.of(
                     context,

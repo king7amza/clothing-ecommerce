@@ -9,7 +9,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CatalogPage extends StatefulWidget {
   final String categoryItemName;
-  const CatalogPage({super.key, required this.categoryItemName});
+  final String categoryEndpoint;
+  const CatalogPage({
+    super.key,
+    required this.categoryItemName,
+    required this.categoryEndpoint,
+  });
 
   @override
   State<CatalogPage> createState() => _CatalogPageState();
@@ -110,6 +115,7 @@ class _CatalogPageState extends State<CatalogPage> {
                                       shopCubit.loadPage(
                                         resultsPerPage,
                                         currentPage * resultsPerPage,
+                                        widget.categoryEndpoint,
                                       );
                                     }
                                   },
@@ -148,6 +154,7 @@ class _CatalogPageState extends State<CatalogPage> {
                                           shopCubit.loadPage(
                                             resultsPerPage,
                                             i * resultsPerPage,
+                                            widget.categoryEndpoint,
                                           );
                                         }
                                       },
@@ -180,6 +187,7 @@ class _CatalogPageState extends State<CatalogPage> {
                                       shopCubit.loadPage(
                                         resultsPerPage,
                                         currentPage * resultsPerPage,
+                                        widget.categoryEndpoint,
                                       );
                                     }
                                   },
@@ -200,6 +208,7 @@ class _CatalogPageState extends State<CatalogPage> {
                                       shopCubit.loadPage(
                                         resultsPerPage,
                                         currentPage * resultsPerPage,
+                                        widget.categoryEndpoint,
                                       );
                                     }
                                   },

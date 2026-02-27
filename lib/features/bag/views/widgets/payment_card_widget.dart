@@ -24,45 +24,45 @@ class PaymentCardWidget extends StatelessWidget {
                   ),
                   child: Image.asset(
                     "assets/images/payments_images/payment_card_templet.png",
-                    width: double.infinity,
-                    height: 370,
+                    width: size.width,
+                    height: size.height * 0.3,
                     fit: BoxFit.contain,
                   ),
                 ),
               ),
               Positioned(
-                top: 0,
-                right: 0,
+                top: size.height * 0.02,
+                right: -size.width * 0.05,
                 child: Image.asset(
                   "assets/images/payments_images/Ellipse.png",
-                  width: 200,
-                  height: 200,
+                  width: size.width * 0.4,
+                  height: size.width * 0.3,
                   fit: BoxFit.cover,
                 ),
               ),
               Positioned(
-                bottom: 0,
-                left: 0,
+                bottom: -size.width * 0.35,
+                left: -size.width * 0.01,
                 child: Image.asset(
                   "assets/images/payments_images/Vector.png",
-                  width: 400,
-                  height: 150,
+                  width: size.width * 0.7,
+                  height: size.height * 0.4,
                   fit: BoxFit.contain,
                 ),
               ),
               Positioned(
-                top: 60,
-                left: 60,
+                top: size.height * 0.02,
+                left: size.width * 0.05,
                 child: Image.asset(
                   "assets/images/payments_images/chip.png",
-                  width: 55,
-                  height: 55,
+                  width: size.width * 0.1,
+                  height: size.height * 0.1,
                   fit: BoxFit.contain,
                 ),
               ),
               Positioned(
-                top: 150,
-                left: 130,
+                top: size.height * 0.1,
+                left: size.width * 0.23,
                 child: Text(
                   paymentCard.cardNumber,
                   style: Theme.of(context).textTheme.headlineMedium!.copyWith(
@@ -73,9 +73,9 @@ class PaymentCardWidget extends StatelessWidget {
                 ),
               ),
               Positioned(
-                bottom: 60,
-                left: 60,
-                right: 60,
+                bottom: size.height * 0.05,
+                left: size.width * 0.05,
+                right: size.width * 0.05,
                 child: Row(
                   children: [
                     Column(
@@ -134,7 +134,7 @@ class PaymentCardWidget extends StatelessWidget {
           Row(
             children: [
               Container(
-                width: size.width * 0.07,
+                width: size.width * 0.085,
                 height: size.height * 0.04,
                 decoration: BoxDecoration(
                   color: AppColors.black,
@@ -142,12 +142,14 @@ class PaymentCardWidget extends StatelessWidget {
                 ),
                 child: Center(child: Icon(Icons.check, color: Colors.white)),
               ),
-              SizedBox(width: size.width * 0.08),
+              SizedBox(width: size.width * 0.05),
               Text(
                 "Use as Default Payment Method",
                 style: Theme.of(
                   context,
-                ).textTheme.headlineSmall!.copyWith(color: AppColors.black),
+                ).textTheme.titleLarge!.copyWith(
+                  fontSize: size.width * 0.05,
+                  color: AppColors.black),
               ),
             ],
           ),
