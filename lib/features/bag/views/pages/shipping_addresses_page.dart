@@ -304,11 +304,10 @@ class _ShippingAddressesPageState extends State<ShippingAddressesPage>
                     );
                   },
                   child: Container(
-                    width: size.width * 0.104,
-                    height: size.height * 0.06,
+                    padding: EdgeInsets.all(size.height * 0.025),
                     decoration: BoxDecoration(
                       color: AppColors.black,
-                      borderRadius: BorderRadius.circular(size.height * 0.03),
+                      borderRadius: BorderRadius.circular(size.height * 0.07),
                     ),
                     child: Center(
                       child: Icon(

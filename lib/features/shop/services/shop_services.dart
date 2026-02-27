@@ -7,10 +7,12 @@ class ShopServices {
   final aDio = Dio();
   Future<ClothesResponseModel?> fetchProducts(
     ClothesRequestModel requestModel,
+    categoryEndpoint,
   ) async {
     aDio.options.baseUrl = AppConstants.apiBaseUrl;
     final response = await aDio.get(
-      AppConstants.productsEndpoint,
+      
+      "${AppConstants.productsEndpoint}$categoryEndpoint",
       queryParameters: requestModel.toMap(),
     );
     if (response.statusCode == 200 && response.data != null) {

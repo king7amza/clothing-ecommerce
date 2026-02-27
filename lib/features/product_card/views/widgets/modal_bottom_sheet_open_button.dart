@@ -18,12 +18,29 @@ class ModalBottomSheetOpenButton extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 13),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(title!, style: Theme.of(context).textTheme.titleMedium),
-            Icon(Icons.keyboard_arrow_down_sharp, color: AppColors.black),
-          ],
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final double fontSize =
+                title == "Extra Extra Large"
+                ? constraints.maxWidth * 0.1
+                : constraints.maxWidth * 0.15;
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  title!,
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleMedium!.copyWith(fontSize: fontSize),
+                ),
+                Icon(
+                  Icons.keyboard_arrow_down_sharp,
+                  color: AppColors.black,
+                  size: constraints.maxWidth * 0.2,
+                ),
+              ],
+            );
+          },
         ),
       ),
     );

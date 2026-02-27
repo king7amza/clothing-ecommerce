@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       navigatorObservers: [routeObserver],
       home: const BottomNavBarPage(),
       // initialRoute: "/signup",
+      // initialRoute: "/login",
       onGenerateRoute: AppRouter.onGenerateRoute,
     );
   }

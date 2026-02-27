@@ -16,6 +16,8 @@ class IconQuantityButtonWidget extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
+        width: size.height * 0.05,
+        height: size.height * 0.05,
         decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.circular(size.height * 0.05),
@@ -28,11 +30,10 @@ class IconQuantityButtonWidget extends StatelessWidget {
             ),
           ],
         ),
-        child: Center(
-          child: Padding(
-            padding: EdgeInsets.all(size.height * 0.013),
-            child: Icon(icon, color: AppColors.darkGrey),
-          ),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return Center(child: Icon(icon, color: AppColors.darkGrey, size: constraints.maxWidth * 0.5));
+          }
         ),
       ),
     );

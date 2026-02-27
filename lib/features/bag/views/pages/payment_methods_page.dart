@@ -128,95 +128,101 @@ class _PaymentMethodsPageState extends State<PaymentMethodsPage> {
                             padding: EdgeInsets.symmetric(
                               horizontal: size.width * 0.04,
                             ),
-                            child: Column(
-                              children: [
-                                SizedBox(height: size.height * 0.02),
-                                Container(
-                                  width: size.width * 0.15,
-                                  height: size.height * 0.008,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.grey,
-                                    borderRadius: BorderRadius.circular(
-                                      size.height * 0.004,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(height: size.height * 0.03),
-                                Text(
-                                  "Add New Card",
-                                  style: Theme.of(
-                                    context,
-                                  ).textTheme.headlineMedium,
-                                ),
-                                SizedBox(height: size.height * 0.03),
-                                AddNewCardTextFieldWidget(
-                                  lableText: "Name on card",
-                                  hintText: "Enter name on card",
-                                  controller: nameOnCardController,
-                                ),
-                                SizedBox(height: size.height * 0.03),
-                                AddNewCardTextFieldWidget(
-                                  lableText: "Card number",
-                                  hintText: "Enter card number",
-                                  controller: cardNumberController,
-                                ),
-                                SizedBox(height: size.height * 0.03),
-                                AddNewCardTextFieldWidget(
-                                  lableText: "Expiry date",
-                                  hintText: "MM/YY",
-                                  controller: expiryDateController,
-                                ),
-                                SizedBox(height: size.height * 0.03),
-                                AddNewCardTextFieldWidget(
-                                  lableText: "CVV",
-                                  hintText: "Enter CVV",
-                                  controller: cvvController,
-                                ),
-                                SizedBox(height: size.height * 0.03),
-                                Row(
+                            child: LayoutBuilder(
+                              builder: (context, constraints) {
+                                return Column(
                                   children: [
+                                    SizedBox(height: size.height * 0.02),
                                     Container(
-                                      width: size.width * 0.06,
-                                      height: size.height * 0.033,
+                                      width: size.width * 0.15,
+                                      height: size.height * 0.008,
                                       decoration: BoxDecoration(
-                                        color: AppColors.black,
+                                        color: AppColors.grey,
                                         borderRadius: BorderRadius.circular(
-                                          size.width * 0.01,
-                                        ),
-                                      ),
-                                      child: Center(
-                                        child: Icon(
-                                          Icons.check,
-                                          color: AppColors.white,
-                                          size: size.height * 0.025,
+                                          size.height * 0.004,
                                         ),
                                       ),
                                     ),
-                                    SizedBox(width: size.width * 0.02),
+                                    SizedBox(height: size.height * 0.03),
                                     Text(
-                                      "Set as default payment method",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge!
-                                          .copyWith(color: AppColors.black),
+                                      "Add New Card",
+                                      style: Theme.of(
+                                        context,
+                                      ).textTheme.headlineMedium,
+                                    ),
+                                    SizedBox(height: size.height * 0.03),
+                                    AddNewCardTextFieldWidget(
+                                      lableText: "Name on card",
+                                      hintText: "Enter name on card",
+                                      controller: nameOnCardController,
+                                    ),
+                                    SizedBox(height: size.height * 0.03),
+                                    AddNewCardTextFieldWidget(
+                                      lableText: "Card number",
+                                      hintText: "Enter card number",
+                                      controller: cardNumberController,
+                                    ),
+                                    SizedBox(height: size.height * 0.03),
+                                    AddNewCardTextFieldWidget(
+                                      lableText: "Expiry date",
+                                      hintText: "MM/YY",
+                                      controller: expiryDateController,
+                                    ),
+                                    SizedBox(height: size.height * 0.03),
+                                    AddNewCardTextFieldWidget(
+                                      lableText: "CVV",
+                                      hintText: "Enter CVV",
+                                      controller: cvvController,
+                                    ),
+                                    SizedBox(height: size.height * 0.03),
+                                    Row(
+                                      children: [
+                                        Container(
+                                          width: constraints.maxWidth * 0.08,
+                                          height: constraints.maxHeight * 0.043,
+                                          decoration: BoxDecoration(
+                                            color: AppColors.black,
+                                            borderRadius: BorderRadius.circular(
+                                              size.width * 0.01,
+                                            ),
+                                          ),
+                                          child: Center(
+                                            child: Icon(
+                                              Icons.check,
+                                              color: AppColors.white,
+                                              size: size.height * 0.025,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(width: size.width * 0.02),
+                                        Text(
+                                          "Set as default payment method",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleLarge!
+                                              .copyWith(
+                                                fontSize: size.width * 0.05,
+                                                color: AppColors.black),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: size.height * 0.03),
+                                    CustomMainButtonWidget(
+                                      title: "ADD CARD",
+                                      onTap: () {
+                                        paymentMethodsCubit.addNewCard(
+                                          name: nameOnCardController.text,
+                                          cardNumber: cardNumberController.text,
+                                          expiryDate: expiryDateController.text,
+                                          cvv: cvvController.text,
+                                        );
+                                        paymentMethodsCubit.fetchCards();
+                                        Navigator.pop(context);
+                                      },
                                     ),
                                   ],
-                                ),
-                                SizedBox(height: size.height * 0.03),
-                                CustomMainButtonWidget(
-                                  title: "ADD CARD",
-                                  onTap: () {
-                                    paymentMethodsCubit.addNewCard(
-                                      name: nameOnCardController.text,
-                                      cardNumber: cardNumberController.text,
-                                      expiryDate: expiryDateController.text,
-                                      cvv: cvvController.text,
-                                    );
-                                    paymentMethodsCubit.fetchCards();
-                                    Navigator.pop(context);
-                                  },
-                                ),
-                              ],
+                                );
+                              }
                             ),
                           ),
                         );
@@ -224,11 +230,10 @@ class _PaymentMethodsPageState extends State<PaymentMethodsPage> {
                     );
                   },
                   child: Container(
-                    width: size.width * 0.104,
-                    height: size.height * 0.06,
+                    padding: EdgeInsets.all(size.height * 0.025),
                     decoration: BoxDecoration(
                       color: AppColors.black,
-                      borderRadius: BorderRadius.circular(size.height * 0.03),
+                      borderRadius: BorderRadius.circular(size.height * 0.07),
                     ),
                     child: Center(
                       child: Icon(

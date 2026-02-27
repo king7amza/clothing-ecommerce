@@ -22,7 +22,7 @@ class BagItemCardWidget extends StatelessWidget {
     return BlocProvider(
       create: (context) => ChangeQuantityCubit(),
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: size.height * 0.01),
+        margin: EdgeInsets.symmetric(horizontal: size.width * 0.05, vertical: size.height * 0.01),
         height: size.height * 0.2,
         width: double.infinity,
         decoration: BoxDecoration(
@@ -95,7 +95,7 @@ class BagItemCardWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SizedBox(
-                          width: size.width * 0.3,
+                          width: size.width * 0.4,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [

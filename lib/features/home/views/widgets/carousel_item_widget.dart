@@ -199,6 +199,8 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                           SizedBox(height: size.height * 0.01),
                           Text(
                             "${product.title}",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: Theme.of(context).textTheme.bodyLarge!
                                 .copyWith(
                                   color: AppColors.black,

@@ -116,16 +116,21 @@ class AppRouter {
       case "/catalog":
         final categoryItemName =
             (settings.arguments as CategoryItemModel).title;
-        final int categoryPageNumber =
-            (settings.arguments as CategoryItemModel).startPage;
+        // final int categoryPageNumber =
+        //     (settings.arguments as CategoryItemModel).startPage;
+        final String categoryEndpoint =
+            (settings.arguments as CategoryItemModel).endPoint;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) {
               final shopCubit = ShopCubit();
-              shopCubit.loadPage(20, categoryPageNumber);
+              shopCubit.loadPage(20, 0, categoryEndpoint);
               return shopCubit;
             },
-            child: CatalogPage(categoryItemName: categoryItemName),
+            child: CatalogPage(
+              categoryItemName: categoryItemName,
+              categoryEndpoint: categoryEndpoint,
+            ),
           ),
         );
       default:

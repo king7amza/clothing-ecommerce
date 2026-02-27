@@ -25,25 +25,29 @@ class ShopCubit extends Cubit<ShopState> {
     }
   }
 
-  Future<void> loadPage(int limit, int skip) async {
+  Future<void> loadPage(int limit, int skip, String categoryEndpoint) async {
     print("📥 Loading page: limit=$limit, skip=$skip");
     if (isClosed) return;
     emit(FetchingProducts());
     try {
       final productsData = await shopServices.fetchProducts(
         ClothesRequestModel(limit: limit, skip: skip),
+        categoryEndpoint,
       );
       print(
         "✅ Data received for skip=$skip, items: ${productsData?.products.length ?? 0}",
       );
       if (productsData != null) {
-        totalProducts ??= productsData.total;
+        final expandedProducts = expandProducts(productsData.products);
+        totalProducts ??= expandedProducts.length;
+        // totalProducts ??= productsData.total;
         if (limit > resultsPerPage) {
           print("📦 Distributed batch to pages: ${pageCache.keys}");
-          _distributeBatchToPages(productsData.products, skip);
+          _distributeBatchToPages(expandedProducts, skip);
         } else {
           int pageNumber = skip ~/ resultsPerPage;
-          pageCache[pageNumber] = productsData.products;
+          final expandedProducts = expandProducts(productsData.products);
+          pageCache[pageNumber] = expandedProducts;
           print("💾 Saved page $pageNumber to cache");
         }
       }
@@ -52,5 +56,10 @@ class ShopCubit extends Cubit<ShopState> {
       print("❌ Error loading page: $e");
       emit(ErrorFetchingProducts(e.toString()));
     }
+  }
+
+  List<Products> expandProducts(List<Products> products) {
+    final expanded = List.generate(200, (i) => products[i % products.length]);
+    return expanded;
   }
 }

@@ -8,6 +8,7 @@ class WomenCategoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.sizeOf(context);
     return SingleChildScrollView(
       child: Column(
         children: [

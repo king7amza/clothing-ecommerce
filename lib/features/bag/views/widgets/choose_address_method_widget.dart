@@ -16,9 +16,11 @@ class ChooseAddressMethodWidget extends StatelessWidget {
     return Column(
       children: [
         Container(
+          width: size.width * 0.4,
+          height: size.height * 0.2,
           decoration: BoxDecoration(
             color: AppColors.white,
-            borderRadius: BorderRadius.circular(size.width * 0.3),
+            borderRadius: BorderRadius.circular(size.width * 0.1),
           ),
           child: Padding(
             padding: EdgeInsets.all(size.width * 0.08),
