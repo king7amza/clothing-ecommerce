@@ -1,5 +1,4 @@
 import 'package:clothing_ecommerce/core/common/common_widgets/custom_main_button_widget.dart';
-import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:clothing_ecommerce/core/common/common_widgets/custom_text_field_widget.dart';
 import 'package:clothing_ecommerce/features/auth/view_models/login_cubit/login_cubit.dart';
 import 'package:flutter/material.dart';
@@ -17,18 +16,19 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     Size size = MediaQuery.sizeOf(context);
     final loginCubit = BlocProvider.of<LoginCubit>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: AppColors.lightGrey3,
+        backgroundColor: colorScheme.tertiary,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: AppColors.black),
+          icon: Icon(Icons.arrow_back, color: colorScheme.secondary),
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      backgroundColor: AppColors.lightGrey3,
+      backgroundColor: colorScheme.tertiary,
       body: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: size.width * 0.08,
@@ -39,9 +39,10 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             Text(
               "Login",
-              style: Theme.of(
-                context,
-              ).textTheme.displayMedium!.copyWith(fontWeight: FontWeight.w500),
+              style: Theme.of(context).textTheme.displayMedium!.copyWith(
+                color: colorScheme.secondary,
+                fontWeight: FontWeight.w500,
+              ),
             ),
             SizedBox(height: size.height * 0.093),
             Column(
@@ -68,14 +69,19 @@ class _LoginPageState extends State<LoginPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text(
-                    "Forgot Your Password?",
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      color: AppColors.black,
-                      fontWeight: FontWeight.w600,
+                  TextButton(
+                    child: Text(
+                      "Forgot Your Password?",
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        color: colorScheme.secondary,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/forgotPassword');
+                    },
                   ),
-                  Icon(Icons.arrow_forward, color: AppColors.primaryColor),
+                  Icon(Icons.arrow_forward, color: colorScheme.primary),
                 ],
               ),
             ),
@@ -126,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
                 Text(
                   "Or login with social account",
                   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                    color: AppColors.black,
+                    color: colorScheme.secondary,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -138,7 +144,7 @@ class _LoginPageState extends State<LoginPage> {
                       height: size.height * 0.076,
                       width: size.width * 0.2,
                       decoration: BoxDecoration(
-                        color: AppColors.white,
+                        color: colorScheme.surface,
                         borderRadius: BorderRadius.circular(60),
                       ),
                       child: Padding(
@@ -151,7 +157,7 @@ class _LoginPageState extends State<LoginPage> {
                       height: size.height * 0.076,
                       width: size.width * 0.2,
                       decoration: BoxDecoration(
-                        color: AppColors.white,
+                        color: colorScheme.surface,
                         borderRadius: BorderRadius.circular(60),
                       ),
                       child: Padding(

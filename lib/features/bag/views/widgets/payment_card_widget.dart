@@ -1,4 +1,3 @@
-import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:clothing_ecommerce/features/bag/models/payment_cards_model.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +8,7 @@ class PaymentCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.sizeOf(context);
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Padding(
       padding: EdgeInsets.only(bottom: size.height * 0.03),
       child: Column(
@@ -25,7 +25,7 @@ class PaymentCardWidget extends StatelessWidget {
                   child: Image.asset(
                     "assets/images/payments_images/payment_card_templet.png",
                     width: size.width,
-                    height: size.height * 0.3,
+                    height: size.height * 0.32,
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -66,7 +66,7 @@ class PaymentCardWidget extends StatelessWidget {
                 child: Text(
                   paymentCard.cardNumber,
                   style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                    color: Colors.white,
+                    color: colorScheme.secondary,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 2,
                   ),
@@ -84,7 +84,7 @@ class PaymentCardWidget extends StatelessWidget {
                           "Card Holder Name",
                           style: Theme.of(context).textTheme.bodyMedium!
                               .copyWith(
-                                color: Colors.white,
+                                color: colorScheme.secondary,
                                 fontWeight: FontWeight.bold,
                               ),
                         ),
@@ -92,7 +92,7 @@ class PaymentCardWidget extends StatelessWidget {
                           paymentCard.cardHolderName,
                           style: Theme.of(context).textTheme.headlineSmall!
                               .copyWith(
-                                color: Colors.white,
+                                color: colorScheme.secondary,
                                 fontWeight: FontWeight.bold,
                               ),
                         ),
@@ -105,7 +105,7 @@ class PaymentCardWidget extends StatelessWidget {
                           "Expiry Date",
                           style: Theme.of(context).textTheme.bodyMedium!
                               .copyWith(
-                                color: Colors.white,
+                                color: colorScheme.secondary,
                                 fontWeight: FontWeight.bold,
                               ),
                         ),
@@ -113,7 +113,7 @@ class PaymentCardWidget extends StatelessWidget {
                           paymentCard.expiryDate,
                           style: Theme.of(context).textTheme.headlineSmall!
                               .copyWith(
-                                color: Colors.white,
+                                color: colorScheme.secondary,
                                 fontWeight: FontWeight.bold,
                               ),
                         ),
@@ -131,25 +131,28 @@ class PaymentCardWidget extends StatelessWidget {
               ),
             ],
           ),
+          SizedBox(height: size.height * 0.01),
           Row(
             children: [
               Container(
-                width: size.width * 0.085,
-                height: size.height * 0.04,
                 decoration: BoxDecoration(
-                  color: AppColors.black,
+                  color: colorScheme.secondary,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Center(child: Icon(Icons.check, color: Colors.white)),
+                child: Padding(
+                  padding: EdgeInsets.all(size.width * 0.013),
+                  child: Center(
+                    child: Icon(Icons.check, color: colorScheme.surface),
+                  ),
+                ),
               ),
               SizedBox(width: size.width * 0.05),
               Text(
                 "Use as Default Payment Method",
-                style: Theme.of(
-                  context,
-                ).textTheme.titleLarge!.copyWith(
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(
                   fontSize: size.width * 0.05,
-                  color: AppColors.black),
+                  color: colorScheme.secondary,
+                ),
               ),
             ],
           ),

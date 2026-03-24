@@ -1,5 +1,4 @@
 import 'package:clothing_ecommerce/core/common/common_widgets/custom_main_button_widget.dart';
-import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:clothing_ecommerce/features/bag/view_models/fetch_bag_products_cubit/fetch_bag_products_cubit.dart';
 import 'package:clothing_ecommerce/features/bag/views/widgets/bag_item_card_widget.dart';
 import 'package:clothing_ecommerce/features/bag/views/widgets/shimmer_item_widget.dart';
@@ -12,15 +11,17 @@ class BagPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.sizeOf(context);
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.lightGrey1,
+        automaticallyImplyLeading: false,
+        backgroundColor: colorScheme.surfaceContainerHighest,
         actions: [
           IconButton(
             onPressed: () {},
             icon: Icon(
               Icons.search,
-              color: AppColors.black,
+              color: colorScheme.secondary,
               size: size.width * 0.06,
             ),
           ),
@@ -28,7 +29,7 @@ class BagPage extends StatelessWidget {
         elevation: 0,
         scrolledUnderElevation: 0,
       ),
-      backgroundColor: AppColors.lightGrey1,
+      backgroundColor: colorScheme.surfaceContainerHighest,
       body: BlocProvider(
         create: (context) {
           final cubit = FetchBagProductsCubit();
@@ -43,7 +44,7 @@ class BagPage extends StatelessWidget {
               child: Text(
                 'My Bag',
                 style: Theme.of(context).textTheme.displayLarge!.copyWith(
-                  color: AppColors.black,
+                  color: colorScheme.secondary,
                   fontSize: size.width * 0.08,
                   fontWeight: FontWeight.bold,
                 ),
@@ -67,8 +68,18 @@ class BagPage extends StatelessWidget {
                       },
                     );
                   } else if (state is FetchedBagProducts) {
-                    final bagItems = state.bagItems; //old
+                    final bagItems = state.bagItems;
                     if (bagItems.isNotEmpty) {
+                      final int totalAmount = bagItems.fold<int>(
+                        0,
+                        (previous, element) =>
+                            previous +
+                            (element.product.price!.ceil() * element.quantity),
+                      );
+                      final int totalQuantity = bagItems.fold<int>(
+                        0,
+                        (previous, element) => previous + element.quantity,
+                      );
                       return Stack(
                         children: [
                           ListView.builder(
@@ -86,7 +97,7 @@ class BagPage extends StatelessWidget {
                             child: Container(
                               height: size.height * 0.2,
                               decoration: BoxDecoration(
-                                color: AppColors.lightGrey3,
+                                color: colorScheme.tertiary,
                                 borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(size.height * 0.02),
                                   topRight: Radius.circular(size.height * 0.02),
@@ -109,18 +120,18 @@ class BagPage extends StatelessWidget {
                                               .textTheme
                                               .headlineSmall!
                                               .copyWith(
-                                                color: AppColors.grey,
+                                                color: colorScheme.onSurface,
                                                 fontSize: size.width * 0.04,
                                                 fontWeight: FontWeight.bold,
                                               ),
                                         ),
                                         Text(
-                                          '${bagItems.fold<int>(0, (previous, element) => previous + (element.product.price!.ceil() * element.quantity))}\$',
+                                          '$totalAmount\$',
                                           style: Theme.of(context)
                                               .textTheme
                                               .headlineSmall!
                                               .copyWith(
-                                                color: AppColors.black,
+                                                color: colorScheme.secondary,
                                                 fontSize: size.width * 0.05,
                                                 fontWeight: FontWeight.bold,
                                               ),
@@ -136,7 +147,15 @@ class BagPage extends StatelessWidget {
                                     child: CustomMainButtonWidget(
                                       title: "Checkout",
                                       onTap: () {
-                                        Navigator.pushNamed(context, "/checkout");
+                                        Navigator.pushNamed(
+                                          context,
+                                          "/checkout",
+                                          arguments: {
+                                            "bagItems": bagItems,
+                                            "totalAmount": totalAmount,
+                                            "totalQuantity": totalQuantity,
+                                          },
+                                        );
                                       },
                                     ),
                                   ),
@@ -158,9 +177,11 @@ class BagPage extends StatelessWidget {
                     }
                   } else if (state is BagProductsError) {
                     return Container(
-                      margin: EdgeInsets.symmetric(vertical: size.height * 0.01),
+                      margin: EdgeInsets.symmetric(
+                        vertical: size.height * 0.01,
+                      ),
                       height: 100,
-                      color: AppColors.grey,
+                      color: colorScheme.onSurface,
                       child: Center(child: Text(state.message)),
                     );
                   }

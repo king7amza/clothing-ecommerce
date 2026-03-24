@@ -1,6 +1,8 @@
 import 'package:clothing_ecommerce/core/common/common_models/clothes_response_model.dart';
 import 'package:clothing_ecommerce/core/common/common_pages/not_found_page.dart';
 import 'package:clothing_ecommerce/core/common/common_pages/bottom_nav_bar_page.dart';
+import 'package:clothing_ecommerce/features/auth/view_models/forgot_password_cubit/forgot_password_cubit.dart';
+import 'package:clothing_ecommerce/features/auth/views/pages/forgot_password_page.dart';
 import 'package:clothing_ecommerce/features/bag/view_models/payment_methods_cubit/payment_methods_cubit.dart';
 import 'package:clothing_ecommerce/features/bag/view_models/shipping_locations_cubit/shipping_locations_cubit.dart';
 import 'package:clothing_ecommerce/features/bag/view_models/detect_location_cubit/detect_location_cubit.dart';
@@ -13,7 +15,9 @@ import 'package:clothing_ecommerce/features/product_card/views/pages/product_car
 import 'package:clothing_ecommerce/features/home/views/pages/home_page.dart';
 import 'package:clothing_ecommerce/features/auth/view_models/login_cubit/login_cubit.dart';
 import 'package:clothing_ecommerce/features/auth/views/pages/login_pgae.dart';
+import 'package:clothing_ecommerce/features/profile/view_models/theming_cubit/theming_cubit.dart';
 import 'package:clothing_ecommerce/features/profile/views/pages/my_orders_page.dart';
+import 'package:clothing_ecommerce/features/profile/views/pages/themes_page.dart';
 import 'package:clothing_ecommerce/features/profile/views/pages/user_settings-page.dart';
 import 'package:clothing_ecommerce/features/shop/models/category_item_model.dart';
 import 'package:clothing_ecommerce/features/shop/view_models/shop_cubit/shop_cubit.dart';
@@ -60,21 +64,41 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const MyOrdersPage());
       case "/success":
         return MaterialPageRoute(builder: (_) => const SuccessShippingPage());
+      case "/themes":
+        return MaterialPageRoute(builder: (_) => const ThemesPage());
       case "/settings":
-        return MaterialPageRoute(builder: (_) => const UserSettingsPage());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => ThemingCubit(),
+            child: const UserSettingsPage(),
+          ),
+        );
+      case "/forgotPassword":
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => ForgotPasswordCubit(),
+            child: const ForgotPasswordPage(),
+          ),
+        );
       case "/productCard":
         final product = settings.arguments as Products?;
         return MaterialPageRoute(
           builder: (_) => ProductCardPage(product: product),
         );
       case "/checkout":
+        final Map<String, dynamic> checkoutPayloadMap =
+            settings.arguments as Map<String, dynamic>;
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(
             providers: [
               BlocProvider(create: (context) => PaymentMethodsCubit()),
               BlocProvider(create: (context) => ShippingLocationsCubit()),
             ],
-            child: CheckoutPage(),
+            child: CheckoutPage(
+              bagItems: checkoutPayloadMap["bagItems"],
+              totalAmount: checkoutPayloadMap["totalAmount"],
+              totalQuantity: checkoutPayloadMap["totalQuantity"],
+            ),
           ),
         );
       case "/payment":

@@ -1,5 +1,4 @@
 import 'package:clothing_ecommerce/core/common/common_widgets/custom_main_button_widget.dart';
-import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:clothing_ecommerce/features/product_card/view_models/modal_bottom_sheet_cubit/modal_bottom_sheet_cubit.dart';
 import 'package:clothing_ecommerce/features/product_card/views/widgets/modal_bottom_sheet_open_button.dart';
 import 'package:flutter/material.dart';
@@ -24,11 +23,12 @@ class CustomModalBottomSheetWidget<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.sizeOf(context);
     final cubit = context.read<ModalBottomSheetCubit>();
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return InkWell(
       onTap: () {
         showModalBottomSheet(
           context: context,
-          backgroundColor: AppColors.white,
+          backgroundColor: colorScheme.surface,
           builder: (BuildContext context) {
             return BlocProvider.value(
               value: cubit,
@@ -39,7 +39,7 @@ class CustomModalBottomSheetWidget<T> extends StatelessWidget {
                     width: size.width * 0.15,
                     height: size.height * 0.008,
                     decoration: BoxDecoration(
-                      color: AppColors.grey,
+                      color: colorScheme.onSurfaceVariant,
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),

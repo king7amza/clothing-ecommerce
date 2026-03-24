@@ -10,7 +10,7 @@ class ProductColorsModel {
 List<ProductColorsModel> productColorsList = [
   ProductColorsModel(colorName: "black", color: AppColors.black),
   ProductColorsModel(colorName: "brown", color: AppColors.brown),
-  ProductColorsModel(colorName: "blue", color: AppColors.blue),
+  ProductColorsModel(colorName: "blue", color: AppColors.darkBlue),
   ProductColorsModel(colorName: "green", color: AppColors.green),
   ProductColorsModel(colorName: "red", color: AppColors.red),
 ];

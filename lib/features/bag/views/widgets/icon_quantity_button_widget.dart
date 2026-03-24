@@ -1,4 +1,3 @@
-import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class IconQuantityButtonWidget extends StatelessWidget {
@@ -13,17 +12,18 @@ class IconQuantityButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return InkWell(
       onTap: onTap,
       child: Container(
         width: size.height * 0.05,
         height: size.height * 0.05,
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: colorScheme.surface,
           borderRadius: BorderRadius.circular(size.height * 0.05),
-          boxShadow: const [
+          boxShadow: [
             BoxShadow(
-              color: AppColors.grey,
+              color: colorScheme.onSurfaceVariant,
               blurRadius: 1,
               offset: Offset(-1, 1),
               spreadRadius: 1,
@@ -32,8 +32,14 @@ class IconQuantityButtonWidget extends StatelessWidget {
         ),
         child: LayoutBuilder(
           builder: (context, constraints) {
-            return Center(child: Icon(icon, color: AppColors.darkGrey, size: constraints.maxWidth * 0.5));
-          }
+            return Center(
+              child: Icon(
+                icon,
+                color: colorScheme.onSecondary,
+                size: constraints.maxWidth * 0.5,
+              ),
+            );
+          },
         ),
       ),
     );

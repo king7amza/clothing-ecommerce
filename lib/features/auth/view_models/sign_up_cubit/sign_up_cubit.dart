@@ -35,7 +35,7 @@ class SignUpCubit extends Cubit<SignUpState> {
   }) async {
     try {
       final currentUser = _firebaseAuth.currentUser;
-      await firestoreServices.setData(
+      await firestoreServices.setDocument(
         path: FirestoreApiPathes.user(currentUser!.uid),
         data: CreateUserModel(
           id: currentUser.uid,

@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:clothing_ecommerce/features/bag/view_models/shipping_locations_cubit/shipping_locations_cubit.dart';
 import 'package:clothing_ecommerce/features/bag/view_models/detect_location_cubit/detect_location_cubit.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +40,7 @@ class _OpenStreetMapPageState extends State<OpenStreetMapPage> {
     super.dispose();
   }
 
-  // 3. دالة جلب العنوان باستخدام Geocoding
+  //Geocoding
   Future<void> _getAddressFromLatLng(LatLng position) async {
     try {
       // نطلب من المكتبة تحويل الإحداثيات إلى عنوان
@@ -80,27 +78,28 @@ class _OpenStreetMapPageState extends State<OpenStreetMapPage> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.sizeOf(context);
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
         title: Text(
           "Choose Your Location",
           style: Theme.of(
             context,
-          ).textTheme.titleLarge?.copyWith(color: AppColors.primaryColor),
+          ).textTheme.titleLarge?.copyWith(color: colorScheme.primary),
         ),
         centerTitle: true,
-        backgroundColor: AppColors.white,
+        backgroundColor: colorScheme.surface,
         elevation: 0,
         actions: [
           IconButton(
-            icon: const Icon(Icons.my_location, color: AppColors.primaryColor),
+            icon: Icon(Icons.my_location, color: colorScheme.primary),
             onPressed: () {
               locationCubit.getCurrentLocation();
             },
           ),
         ],
       ),
-      backgroundColor: AppColors.lightGrey1,
+      backgroundColor: colorScheme.surfaceContainerHighest,
       body: BlocConsumer<DetectLocationCubit, DetectLocationState>(
         bloc: locationCubit,
         listener: (context, state) {
@@ -122,8 +121,8 @@ class _OpenStreetMapPageState extends State<OpenStreetMapPage> {
         builder: (context, state) {
           if (state is DetectLocationLoading &&
               _currentPosition.latitude == 30.0444) {
-            return const Center(
-              child: CircularProgressIndicator(color: AppColors.primaryColor),
+            return Center(
+              child: CircularProgressIndicator(color: colorScheme.primary),
             );
           }
           return FlutterMap(
@@ -154,10 +153,6 @@ class _OpenStreetMapPageState extends State<OpenStreetMapPage> {
                   }
                 });
               },
-              // إضافة مهمة: منع الأخطاء عند التحديثات السريعة
-              // onTap: (tapPosition, point) {
-              // يمكن إضافة منطق النقر هنا لاحقاً
-              // },
             ),
             children: [
               TileLayer(
@@ -173,9 +168,9 @@ class _OpenStreetMapPageState extends State<OpenStreetMapPage> {
                     point: _currentPosition,
                     width: 40,
                     height: 40,
-                    child: const Icon(
+                    child: Icon(
                       Icons.location_on,
-                      color: AppColors.primaryColor,
+                      color: colorScheme.primary,
                       size: 40,
                     ),
                   ),
@@ -191,14 +186,14 @@ class _OpenStreetMapPageState extends State<OpenStreetMapPage> {
                   height: size.height * 0.2,
                   padding: EdgeInsets.symmetric(horizontal: size.width * 0.1),
                   decoration: BoxDecoration(
-                    color: AppColors.white,
+                    color: colorScheme.surface,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(size.width * 0.1),
                       topRight: Radius.circular(size.width * 0.1),
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: AppColors.black,
+                        color: colorScheme.secondary,
                         blurRadius: 8,
                         offset: const Offset(0, 4),
                       ),
@@ -211,7 +206,7 @@ class _OpenStreetMapPageState extends State<OpenStreetMapPage> {
                         _currentAddress,
                         style: Theme.of(context).textTheme.headlineSmall
                             ?.copyWith(
-                              color: AppColors.darkGrey,
+                              color: colorScheme.onSecondary,
                               fontWeight: FontWeight.w500,
                             ),
                         textAlign: TextAlign.center,
@@ -225,12 +220,12 @@ class _OpenStreetMapPageState extends State<OpenStreetMapPage> {
                         duration: const Duration(milliseconds: 500),
                         decoration: BoxDecoration(
                           color: _isMoving
-                              ? AppColors.grey
-                              : AppColors.primaryColor,
+                              ? colorScheme.onSurface
+                              : colorScheme.primary,
                           borderRadius: BorderRadius.circular(30),
                           boxShadow: [
                             BoxShadow(
-                              color: AppColors.black,
+                              color: colorScheme.secondary,
                               blurRadius: 8,
                               offset: const Offset(0, 4),
                             ),
@@ -275,15 +270,15 @@ class _OpenStreetMapPageState extends State<OpenStreetMapPage> {
                                         if (state is AddNewLocationLoading) {
                                           return Center(
                                             child: CircularProgressIndicator(
-                                              color: AppColors.white,
+                                              color: colorScheme.surface,
                                             ),
                                           );
                                         } else if (state
                                             is AddNewLocationFailure) {
-                                          return const Text(
+                                          return Text(
                                             "Failed to add location",
                                             style: TextStyle(
-                                              color: AppColors.red,
+                                              color: colorScheme.error,
                                               fontWeight: FontWeight.bold,
                                               fontSize: 16,
                                             ),
@@ -297,13 +292,14 @@ class _OpenStreetMapPageState extends State<OpenStreetMapPage> {
                                                 MainAxisAlignment.center,
                                             children: [
                                               if (_isMoving)
-                                                const SizedBox(
+                                                SizedBox(
                                                   width: 16,
                                                   height: 16,
                                                   child:
                                                       CircularProgressIndicator(
                                                         strokeWidth: 2,
-                                                        color: AppColors.white,
+                                                        color:
+                                                            colorScheme.surface,
                                                       ),
                                                 ),
                                               SizedBox(
@@ -317,7 +313,8 @@ class _OpenStreetMapPageState extends State<OpenStreetMapPage> {
                                                     .textTheme
                                                     .headlineSmall
                                                     ?.copyWith(
-                                                      color: AppColors.white,
+                                                      color:
+                                                          colorScheme.surface,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                     ),

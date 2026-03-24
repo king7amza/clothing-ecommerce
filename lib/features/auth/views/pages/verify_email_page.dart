@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:clothing_ecommerce/features/auth/services/auth_services.dart';
 import 'package:clothing_ecommerce/features/auth/view_models/verify_email_cubit/verify_email_cubit.dart';
 import 'package:clothing_ecommerce/features/auth/views/widgets/resend_email_widget.dart';
@@ -25,6 +23,7 @@ class _VerifyEmailWatingPageState extends State<VerifyEmailWatingPage> {
     _verifyEmailCubit = BlocProvider.of<VerifyEmailCubit>(context);
     _startVerificationPolling();
   }
+
   void _startVerificationPolling() {
     _verificationTimer = Timer.periodic(const Duration(seconds: 2), (_) async {
       final user = FirebaseAuth.instance.currentUser;
@@ -38,7 +37,11 @@ class _VerifyEmailWatingPageState extends State<VerifyEmailWatingPage> {
         if (isVerified) {
           _verificationTimer?.cancel();
           if (!mounted) return;
-          Navigator.pushNamedAndRemoveUntil(context, '/bottomNavBar', (route) => false);
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            '/bottomNavBar',
+            (route) => false,
+          );
         }
       } catch (_) {}
     });
@@ -53,16 +56,17 @@ class _VerifyEmailWatingPageState extends State<VerifyEmailWatingPage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: AppColors.lightGrey3,
+        backgroundColor: colorScheme.tertiary,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: AppColors.black),
+          icon: Icon(Icons.arrow_back, color: colorScheme.secondary),
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      backgroundColor: AppColors.lightGrey3,
+      backgroundColor: colorScheme.tertiary,
       body: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: size.width * 0.08,

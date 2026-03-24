@@ -1,4 +1,3 @@
-import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:clothing_ecommerce/features/product_card/models/products_sizes_model.dart';
 import 'package:clothing_ecommerce/features/product_card/view_models/modal_bottom_sheet_cubit/modal_bottom_sheet_cubit.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +14,7 @@ class ModalSizeContentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return BlocProvider.value(
       value: context.read<ModalBottomSheetCubit>(),
       child: BlocBuilder<ModalBottomSheetCubit, ModalBottomSheetState>(
@@ -26,17 +26,21 @@ class ModalSizeContentWidget extends StatelessWidget {
           if (state is ModalBottomSheetSuccess) {
             return Container(
               decoration: BoxDecoration(
-                color: isSelected ? AppColors.primaryColor : AppColors.white,
+                color: isSelected ? colorScheme.primary : colorScheme.surface,
                 borderRadius: BorderRadius.circular(15),
                 border: Border.all(
-                  color: isSelected ? AppColors.white : AppColors.grey,
+                  color: isSelected
+                      ? colorScheme.surface
+                      : colorScheme.onSurface,
                 ),
               ),
               child: Center(
                 child: Text(
                   sizeItem.size,
                   style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                    color: isSelected ? AppColors.white : AppColors.black,
+                    color: isSelected
+                        ? colorScheme.onPrimary
+                        : colorScheme.secondary,
                   ),
                 ),
               ),
@@ -44,16 +48,16 @@ class ModalSizeContentWidget extends StatelessWidget {
           }
           return Container(
             decoration: BoxDecoration(
-              color: AppColors.white,
+              color: colorScheme.surface,
               borderRadius: BorderRadius.circular(15),
-              border: Border.all(color: AppColors.grey),
+              border: Border.all(color: colorScheme.onSurface),
             ),
             child: Center(
               child: Text(
                 sizeItem.size,
-                style: Theme.of(
-                  context,
-                ).textTheme.headlineSmall!.copyWith(color: AppColors.black),
+                style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                  color: colorScheme.secondary,
+                ),
               ),
             ),
           );

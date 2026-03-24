@@ -60,7 +60,7 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     final favoriteItemId = favoriteItem.id.toString();
     emit(AddingItemToFavorites());
     try {
-      await firestore.setData(
+      await firestore.setDocument(
         path: FirestoreApiPathes.favoriteItem(userId, favoriteItemId),
         data: favoriteItem.toMap(),
       );
@@ -75,7 +75,7 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     final favoriteItemId = favoriteItem.id.toString();
     emit(RemovingFavoritesItem());
     try {
-      await firestore.deleteData(
+      await firestore.deleteDocument(
         path: FirestoreApiPathes.favoriteItem(userId, favoriteItemId),
       );
       emit(FavoritesItemRemoved());

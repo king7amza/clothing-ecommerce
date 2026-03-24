@@ -1,4 +1,3 @@
-import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class ResultsTiteldValueRowWidget extends StatelessWidget {
@@ -12,19 +11,23 @@ class ResultsTiteldValueRowWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.sizeOf(context);
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
           title,
           style: Theme.of(context).textTheme.titleLarge!.copyWith(
-            color: AppColors.grey,
+            fontSize: size.width * 0.042,
+            color: colorScheme.secondary,
           ),
         ),
         Text(
           value,
           style: Theme.of(context).textTheme.titleLarge!.copyWith(
-            color: AppColors.black,
+            fontSize: size.width * 0.042,
+            color: colorScheme.secondary,
             fontWeight: FontWeight.bold,
           ),
         ),

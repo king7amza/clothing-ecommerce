@@ -25,7 +25,7 @@ class ChangeQuantityCubit extends Cubit<ChangeQuantityState> {
     emit(IncrementQuantityLoading());
     try {
       bagItem = bagItem.copyWith(quantity: quantity);
-      await firestoreServices.setData(
+      await firestoreServices.setDocument(
         path: FirestoreApiPathes.bagItem(userId, bagItemId),
         data: bagItem.toMap(),
       );
@@ -50,7 +50,7 @@ class ChangeQuantityCubit extends Cubit<ChangeQuantityState> {
       quantity = bagItem.quantity - 1;
       emit(DecrementQuantityLoading());
       try {
-        await firestoreServices.setData(
+        await firestoreServices.setDocument(
           path: FirestoreApiPathes.bagItem(userId, bagItemId),
           data: bagItem.copyWith(quantity: quantity).toMap(),
         );
@@ -60,7 +60,7 @@ class ChangeQuantityCubit extends Cubit<ChangeQuantityState> {
       }
     } else {
       try {
-        await firestoreServices.deleteData(
+        await firestoreServices.deleteDocument(
           path: FirestoreApiPathes.bagItem(userId, bagItemId),
         );
       } catch (e) {

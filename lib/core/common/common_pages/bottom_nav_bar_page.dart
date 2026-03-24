@@ -1,4 +1,3 @@
-import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:clothing_ecommerce/features/bag/views/pages/bag_page.dart';
 import 'package:clothing_ecommerce/features/favorites/view_models/favorites_cubit/favorites_cubit.dart';
 import 'package:clothing_ecommerce/features/favorites/views/pages/favorites_page.dart';
@@ -71,14 +70,15 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       body: pages[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         onTap: changePage,
         currentIndex: currentIndex,
-        backgroundColor: AppColors.white,
-        unselectedItemColor: AppColors.grey,
-        selectedItemColor: AppColors.primaryColor,
+        backgroundColor: colorScheme.surface,
+        unselectedItemColor: colorScheme.onSurface,
+        selectedItemColor: colorScheme.primary,
         selectedIconTheme: IconThemeData(size: size.width * 0.1),
         showUnselectedLabels: true,
         showSelectedLabels: true,

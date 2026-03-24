@@ -15,10 +15,13 @@ class AppConstants {
   static const String womensShoesCategoryEndpoint = "/category/womens-shoes";
   static const String womensWatchesCategoryEndpoint =
       "/category/womens-watches";
+  static const String currentTheme = "currentTheme";
 }
 
 class FirestoreApiPathes {
   static String user(String userId) => 'users/$userId';
+  static String userImage(String userId, String imageId) =>
+      'users/$userId/image/$imageId';
   static String bagItem(String userId, String bagItemId) =>
       'users/$userId/bag/$bagItemId';
   static String bagItems(String userId) => 'users/$userId/bag';

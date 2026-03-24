@@ -8,8 +8,24 @@ class FirestoreServices {
 
   FirebaseFirestore get firestore => FirebaseFirestore.instance;
 
+  Future<T> getFields<T>({
+    required String path, // Collection/$documentId
+    required List<String> fieldsName,
+    required T Function(Map<String, dynamic> data) builder,
+  }) async {
+    final reference = firestore.doc(path);
+    final doc = await reference.get();
+    Map<String, dynamic> fieldsMap = {};
+    for (int index = 0; index < fieldsName.length; index++) {
+      final String fieldName = fieldsName[index];
+      final dynamic fieldValue = doc.data()?[fieldName];
+      fieldsMap[fieldName] = fieldValue;
+    }
+    return builder(fieldsMap);
+  }
+
   // add & update data
-  Future<void> setData({
+  Future<void> setDocument({
     required String path, // Collection/$documentId
     required Map<String, dynamic> data,
   }) async {
@@ -18,7 +34,7 @@ class FirestoreServices {
     await reference.set(data);
   }
 
-  Future<void> deleteData({required String path}) async { 
+  Future<void> deleteDocument({required String path}) async {
     final reference = firestore.doc(path);
     debugPrint('delete: $path');
     await reference.delete();
@@ -37,7 +53,10 @@ class FirestoreServices {
     final snapshots = query.snapshots();
     return snapshots.map((snapshot) {
       final result = snapshot.docs
-          .map((snapshot) => builder(snapshot.data() as Map<String, dynamic>, snapshot.id))
+          .map(
+            (snapshot) =>
+                builder(snapshot.data() as Map<String, dynamic>, snapshot.id),
+          )
           .where((value) => value != null)
           .toList();
       if (sort != null) {
@@ -53,7 +72,10 @@ class FirestoreServices {
   }) {
     final reference = firestore.doc(path);
     final snapshots = reference.snapshots();
-    return snapshots.map((snapshot) => builder(snapshot.data() as Map<String, dynamic>, snapshot.id));
+    return snapshots.map(
+      (snapshot) =>
+          builder(snapshot.data() as Map<String, dynamic>, snapshot.id),
+    );
   }
 
   // One Time Request for the document
@@ -79,7 +101,10 @@ class FirestoreServices {
     }
     final snapshots = await query.get();
     final result = snapshots.docs
-        .map((snapshot) => builder(snapshot.data() as Map<String, dynamic>, snapshot.id))
+        .map(
+          (snapshot) =>
+              builder(snapshot.data() as Map<String, dynamic>, snapshot.id),
+        )
         .where((value) => value != null)
         .toList();
     if (sort != null) {

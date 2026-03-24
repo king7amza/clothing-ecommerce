@@ -1,4 +1,3 @@
-import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:clothing_ecommerce/features/product_card/models/product_colors_model.dart';
 import 'package:clothing_ecommerce/features/product_card/view_models/modal_bottom_sheet_cubit/modal_bottom_sheet_cubit.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +14,7 @@ class ModalColorContentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return BlocProvider.value(
       value: context.read<ModalBottomSheetCubit>(),
       child: BlocBuilder<ModalBottomSheetCubit, ModalBottomSheetState>(
@@ -27,7 +27,7 @@ class ModalColorContentWidget extends StatelessWidget {
             return DecoratedBox(
               decoration: BoxDecoration(
                 border: isSelected
-                    ? Border.all(color: AppColors.primaryColor, width: 2)
+                    ? Border.all(color: colorScheme.primary, width: 2)
                     : null,
                 borderRadius: BorderRadius.circular(100),
               ),

@@ -14,4 +14,6 @@ class AppRoutes {
   static const success = '/success';
   static const orders = '/orders';
   static const settings = '/settings';
+  static const forgetPassword = '/forgetPassword';
+  static const themes = '/themes';
 }
