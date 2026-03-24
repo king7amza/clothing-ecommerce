@@ -1,4 +1,3 @@
-import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextFieldWidget extends StatelessWidget {
@@ -14,15 +13,19 @@ class CustomTextFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return TextField(
       controller: controller,
+      style: Theme.of(
+        context,
+      ).textTheme.titleMedium!.copyWith(color: colorScheme.secondary),
       decoration: InputDecoration(
         filled: true,
-        fillColor: AppColors.white,
+        fillColor: colorScheme.surface,
         labelText: labelText,
         hintText: hintText,
-        labelStyle: TextStyle(color: AppColors.grey),
-        hintStyle: TextStyle(color: AppColors.grey),
+        labelStyle: TextStyle(color: colorScheme.onSurfaceVariant),
+        hintStyle: TextStyle(color: colorScheme.onSurfaceVariant),
         border: InputBorder.none,
       ),
     );

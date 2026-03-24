@@ -1,4 +1,3 @@
-import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class TopHeadlineWidget extends StatelessWidget {
@@ -14,6 +13,7 @@ class TopHeadlineWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -24,14 +24,14 @@ class TopHeadlineWidget extends StatelessWidget {
               headline,
               style: Theme.of(context).textTheme.displayLarge!.copyWith(
                 fontWeight: FontWeight.bold,
-                color: AppColors.black,
+                color: colorScheme.secondary,
               ),
             ),
             Text(
               subHeadline,
               style: Theme.of(
                 context,
-              ).textTheme.bodyLarge!.copyWith(color: AppColors.grey),
+              ).textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface),
             ),
           ],
         ),
@@ -41,7 +41,7 @@ class TopHeadlineWidget extends StatelessWidget {
             'View All',
             style: Theme.of(
               context,
-            ).textTheme.bodyLarge!.copyWith(color: AppColors.black),
+            ).textTheme.bodyLarge!.copyWith(color: colorScheme.secondary),
           ),
         ),
       ],

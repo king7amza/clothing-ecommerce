@@ -1,4 +1,3 @@
-import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class TiteldCheckoutValueWidget extends StatelessWidget {
@@ -8,13 +7,14 @@ class TiteldCheckoutValueWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           title!,
           style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-            color: AppColors.black,
+            color: colorScheme.secondary,
             fontWeight: FontWeight.bold,
           ),
         ),

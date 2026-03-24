@@ -1,4 +1,3 @@
-import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class SummerSalesBannerWidget extends StatelessWidget {
@@ -7,6 +6,7 @@ class SummerSalesBannerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.sizeOf(context);
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Container(
       margin: EdgeInsets.only(
         left: size.width * 0.05,
@@ -16,7 +16,7 @@ class SummerSalesBannerWidget extends StatelessWidget {
       height: 150,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.0),
-        color: AppColors.primaryColor,
+        color: colorScheme.primary,
       ),
       child: Center(
         child: Column(
@@ -25,7 +25,7 @@ class SummerSalesBannerWidget extends StatelessWidget {
             Text(
               'SUMMER SALES',
               style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                color: AppColors.white,
+                color: colorScheme.onPrimary,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -34,7 +34,7 @@ class SummerSalesBannerWidget extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                 fontSize: 20,
                 fontWeight: FontWeight.w400,
-                color: AppColors.white,
+                color: colorScheme.onPrimary,
               ),
             ),
           ],

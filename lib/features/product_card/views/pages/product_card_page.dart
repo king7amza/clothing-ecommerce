@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clothing_ecommerce/core/common/common_models/clothes_response_model.dart';
 import 'package:clothing_ecommerce/core/common/common_widgets/custom_main_button_widget.dart';
-import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:clothing_ecommerce/features/product_card/models/bag_item_model.dart';
 import 'package:clothing_ecommerce/features/product_card/models/product_colors_model.dart';
 import 'package:clothing_ecommerce/features/product_card/models/products_sizes_model.dart';
@@ -20,6 +19,7 @@ class ProductCardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.sizeOf(context);
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -30,12 +30,12 @@ class ProductCardPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.share, color: AppColors.black, size: 28),
+            icon: Icon(Icons.share, color: colorScheme.secondary, size: 28),
           ),
         ],
-        backgroundColor: AppColors.lightGrey1,
+        backgroundColor: colorScheme.surfaceContainerHighest,
       ),
-      backgroundColor: AppColors.lightGrey1,
+      backgroundColor: colorScheme.surfaceContainerHighest,
       body: BlocProvider(
         create: (context) => ModalBottomSheetCubit(),
         child: Column(
@@ -110,10 +110,8 @@ class ProductCardPage extends StatelessWidget {
                             onSelected: (color) => context
                                 .read<ModalBottomSheetCubit>()
                                 .toggleColor(color),
-                            itemBuilder: (color) => ModalColorContentWidget(
-                              itemColor: color,
-                              
-                            ),
+                            itemBuilder: (color) =>
+                                ModalColorContentWidget(itemColor: color),
                           );
                         } else {
                           return CustomModalBottomSheetWidget<

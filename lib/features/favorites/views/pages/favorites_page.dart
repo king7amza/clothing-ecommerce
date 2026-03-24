@@ -1,5 +1,4 @@
 import 'package:clothing_ecommerce/core/common/common_models/clothes_response_model.dart';
-import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:clothing_ecommerce/features/bag/views/widgets/shimmer_item_widget.dart';
 import 'package:clothing_ecommerce/features/favorites/view_models/favorites_cubit/favorites_cubit.dart';
 import 'package:clothing_ecommerce/features/favorites/views/widgets/favorite_item_widget.dart';
@@ -12,8 +11,9 @@ class FavoritesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.sizeOf(context);
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
-      backgroundColor: AppColors.lightGrey1,
+      backgroundColor: colorScheme.surfaceContainerHighest,
       body: Column(
         children: [
           Padding(
@@ -26,7 +26,7 @@ class FavoritesPage extends StatelessWidget {
                 Text(
                   'Favorites',
                   style: Theme.of(context).textTheme.displayMedium!.copyWith(
-                    color: AppColors.black,
+                    color: colorScheme.secondary,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -61,7 +61,7 @@ class FavoritesPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Icon(Icons.error, color: AppColors.red),
+                    Icon(Icons.error, color: colorScheme.error),
                     SizedBox(height: size.height * 0.01),
                     Text(state.message),
                   ],
@@ -81,11 +81,9 @@ class FavoritesPage extends StatelessWidget {
                         ),
                         Text(
                           'No favorite items yet',
-                          style: Theme.of(context)
-                              .textTheme
-                              .displaySmall!
+                          style: Theme.of(context).textTheme.displaySmall!
                               .copyWith(
-                                color: AppColors.grey,
+                                color: colorScheme.onSurfaceVariant,
                                 fontWeight: FontWeight.bold,
                               ),
                         ),

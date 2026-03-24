@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:clothing_ecommerce/core/common/common_models/clothes_response_model.dart';
 import 'package:clothing_ecommerce/features/favorites/view_models/favorites_cubit/favorites_cubit.dart';
 import 'package:clothing_ecommerce/features/home/extensions/product_extinsion.dart';
@@ -31,6 +30,7 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.sizeOf(context);
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return SizedBox(
       height: size.height * 0.5,
       width: size.width,
@@ -73,7 +73,7 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                             width: double.infinity,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(26),
-                              color: AppColors.lightGrey3,
+                              color: colorScheme.tertiary,
                             ),
                             child: Stack(
                               children: [
@@ -93,7 +93,7 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                                         true // show sale products
                                     ? Container(
                                         decoration: BoxDecoration(
-                                          color: AppColors.primaryColor,
+                                          color: colorScheme.primary,
                                           borderRadius: BorderRadius.only(
                                             topLeft: Radius.circular(
                                               size.width * 0.1,
@@ -115,14 +115,16 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                                           style: Theme.of(context)
                                               .textTheme
                                               .headlineSmall!
-                                              .copyWith(color: AppColors.white),
+                                              .copyWith(
+                                                color: colorScheme.onPrimary,
+                                              ),
                                         ),
                                       )
                                     : product.isNew ==
                                           true // show new products
                                     ? Container(
                                         decoration: BoxDecoration(
-                                          color: AppColors.black,
+                                          color: colorScheme.surfaceContainer,
                                           borderRadius: BorderRadius.only(
                                             topLeft: Radius.circular(
                                               size.width * 0.1,
@@ -144,7 +146,9 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                                           style: Theme.of(context)
                                               .textTheme
                                               .headlineSmall!
-                                              .copyWith(color: AppColors.white),
+                                              .copyWith(
+                                                color: colorScheme.onPrimary,
+                                              ),
                                         ),
                                       )
                                     : SizedBox.shrink(),
@@ -160,19 +164,19 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                                 if ((index) < product.rating!) {
                                   return Icon(
                                     Icons.star,
-                                    color: AppColors.gold,
+                                    color: colorScheme.tertiaryContainer,
                                     size: size.width * 0.043,
                                   );
                                 } else if ((index - 0.5) <= product.rating!) {
                                   return Icon(
                                     Icons.star_half,
-                                    color: AppColors.gold,
+                                    color: colorScheme.tertiaryContainer,
                                     size: size.width * 0.043,
                                   );
                                 } else {
                                   return Icon(
                                     Icons.star_border,
-                                    color: AppColors.gold,
+                                    color: colorScheme.tertiaryContainer,
                                     size: size.width * 0.043,
                                   );
                                 }
@@ -181,7 +185,7 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                                 "(${product.rating!.toStringAsFixed(1)})",
                                 style: Theme.of(context).textTheme.bodyLarge!
                                     .copyWith(
-                                      color: AppColors.grey,
+                                      color: colorScheme.onSurface,
                                       fontWeight: FontWeight.w500,
                                     ),
                               ),
@@ -192,7 +196,7 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                             "${product.brand}",
                             style: Theme.of(context).textTheme.bodyLarge!
                                 .copyWith(
-                                  color: AppColors.grey,
+                                  color: colorScheme.onSurface,
                                   fontWeight: FontWeight.w500,
                                 ),
                           ),
@@ -203,7 +207,7 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                             overflow: TextOverflow.ellipsis,
                             style: Theme.of(context).textTheme.bodyLarge!
                                 .copyWith(
-                                  color: AppColors.black,
+                                  color: colorScheme.secondary,
                                   fontWeight: FontWeight.w800,
                                 ),
                           ),
@@ -218,7 +222,7 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                                           .textTheme
                                           .bodyLarge!
                                           .copyWith(
-                                            color: AppColors.grey,
+                                            color: colorScheme.onSurface,
                                             fontWeight: FontWeight.w500,
                                             decoration:
                                                 TextDecoration.lineThrough,
@@ -231,7 +235,7 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                                           .textTheme
                                           .bodyLarge!
                                           .copyWith(
-                                            color: AppColors.primaryColor,
+                                            color: colorScheme.primary,
                                             fontWeight: FontWeight.w800,
                                           ),
                                     ),
@@ -242,7 +246,7 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                                   "\$${product.price!.toStringAsFixed(2)}",
                                   style: Theme.of(context).textTheme.bodyLarge!
                                       .copyWith(
-                                        color: AppColors.primaryColor,
+                                        color: colorScheme.primary,
                                         fontWeight: FontWeight.w800,
                                       ),
                                 ),
@@ -280,10 +284,10 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                                             borderRadius: BorderRadius.circular(
                                               40,
                                             ),
-                                            color: AppColors.white,
+                                            color: colorScheme.surfaceTint,
                                             boxShadow: [
                                               BoxShadow(
-                                                color: AppColors.lightGrey3,
+                                                color: colorScheme.tertiary,
                                                 spreadRadius: 2,
                                                 blurRadius: 5,
                                                 offset: const Offset(-3, 3),
@@ -294,7 +298,7 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                                             height: size.width * 0.05,
                                             child: Center(
                                               child: CircularProgressIndicator(
-                                                color: AppColors.primaryColor,
+                                                color: colorScheme.primary,
                                                 strokeWidth: 2,
                                               ),
                                             ),
@@ -315,10 +319,10 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                                             borderRadius: BorderRadius.circular(
                                               40,
                                             ),
-                                            color: AppColors.white,
+                                            color: colorScheme.surfaceTint,
                                             boxShadow: [
                                               BoxShadow(
-                                                color: AppColors.lightGrey3,
+                                                color: colorScheme.tertiary,
                                                 spreadRadius: 2,
                                                 blurRadius: 5,
                                                 offset: const Offset(-3, 3),
@@ -330,8 +334,8 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                                                 ? Icons.favorite
                                                 : Icons.favorite_border,
                                             color: isFavoriteItem
-                                                ? AppColors.primaryColor
-                                                : AppColors.grey,
+                                                ? colorScheme.primary
+                                                : colorScheme.onSurface,
                                           ),
                                         );
                                       } else if (state
@@ -342,10 +346,10 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                                             borderRadius: BorderRadius.circular(
                                               40,
                                             ),
-                                            color: AppColors.white,
+                                            color: colorScheme.surface,
                                             boxShadow: [
                                               BoxShadow(
-                                                color: AppColors.lightGrey3,
+                                                color: colorScheme.tertiary,
                                                 spreadRadius: 2,
                                                 blurRadius: 5,
                                                 offset: const Offset(-3, 3),
@@ -356,7 +360,7 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                                             height: size.width * 0.05,
                                             child: Center(
                                               child: CircularProgressIndicator(
-                                                color: AppColors.primaryColor,
+                                                color: colorScheme.primary,
                                                 strokeWidth: 2,
                                               ),
                                             ),
@@ -368,10 +372,10 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                                             borderRadius: BorderRadius.circular(
                                               40,
                                             ),
-                                            color: AppColors.white,
+                                            color: colorScheme.surface,
                                             boxShadow: [
                                               BoxShadow(
-                                                color: AppColors.lightGrey3,
+                                                color: colorScheme.tertiary,
                                                 spreadRadius: 2,
                                                 blurRadius: 5,
                                                 offset: const Offset(-3, 3),
@@ -385,7 +389,7 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                                             child: Center(
                                               child: Icon(
                                                 Icons.favorite,
-                                                color: AppColors.primaryColor,
+                                                color: colorScheme.primary,
                                                 size: size.width * 0.05,
                                               ),
                                             ),
@@ -398,10 +402,10 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                                             borderRadius: BorderRadius.circular(
                                               40,
                                             ),
-                                            color: AppColors.white,
+                                            color: colorScheme.surface,
                                             boxShadow: [
                                               BoxShadow(
-                                                color: AppColors.lightGrey3,
+                                                color: colorScheme.tertiary,
                                                 spreadRadius: 2,
                                                 blurRadius: 5,
                                                 offset: const Offset(-3, 3),
@@ -415,7 +419,7 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                                             child: Center(
                                               child: Icon(
                                                 Icons.favorite_border,
-                                                color: AppColors.grey,
+                                                color: colorScheme.onSurface,
                                                 size: size.width * 0.05,
                                               ),
                                             ),
@@ -427,10 +431,10 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                                             borderRadius: BorderRadius.circular(
                                               40,
                                             ),
-                                            color: AppColors.white,
+                                            color: colorScheme.surface,
                                             boxShadow: [
                                               BoxShadow(
-                                                color: AppColors.lightGrey3,
+                                                color: colorScheme.tertiary,
                                                 spreadRadius: 2,
                                                 blurRadius: 5,
                                                 offset: const Offset(-3, 3),
@@ -444,7 +448,7 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                                             child: Center(
                                               child: Icon(
                                                 Icons.favorite_border,
-                                                color: AppColors.grey,
+                                                color: colorScheme.onSurface,
                                                 size: size.width * 0.05,
                                               ),
                                             ),
@@ -456,10 +460,10 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                                           borderRadius: BorderRadius.circular(
                                             40,
                                           ),
-                                          color: AppColors.white,
+                                          color: colorScheme.surface,
                                           boxShadow: [
                                             BoxShadow(
-                                              color: AppColors.lightGrey3,
+                                              color: colorScheme.tertiary,
                                               spreadRadius: 2,
                                               blurRadius: 5,
                                               offset: const Offset(-3, 3),
@@ -473,7 +477,7 @@ class _CarouselItemWidgetState extends State<CarouselItemWidget> {
                                           child: Center(
                                             child: Icon(
                                               Icons.favorite_border,
-                                              color: AppColors.grey,
+                                              color: colorScheme.onSurface,
                                               size: size.width * 0.05,
                                             ),
                                           ),

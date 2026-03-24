@@ -1,4 +1,3 @@
-import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class TitledDescriptionNavigationWidget extends StatelessWidget {
@@ -15,10 +14,11 @@ class TitledDescriptionNavigationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.sizeOf(context);
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding:  EdgeInsets.symmetric(vertical: size.height * 0.02),
+        padding: EdgeInsets.symmetric(vertical: size.height * 0.02),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -28,14 +28,14 @@ class TitledDescriptionNavigationWidget extends StatelessWidget {
                 Text(
                   title,
                   style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                    color: AppColors.black,
+                    color: colorScheme.secondary,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
                   description,
                   style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                    color: AppColors.grey,
+                    color: colorScheme.onSurfaceVariant,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -43,7 +43,7 @@ class TitledDescriptionNavigationWidget extends StatelessWidget {
             ),
             Icon(
               Icons.arrow_forward_ios,
-              color: AppColors.grey,
+              color: colorScheme.onSurface,
               size: size.height * 0.02,
             ),
           ],

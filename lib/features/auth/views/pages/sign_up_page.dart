@@ -1,4 +1,3 @@
-import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:clothing_ecommerce/core/common/common_widgets/custom_main_button_widget.dart';
 import 'package:clothing_ecommerce/core/common/common_widgets/custom_text_field_widget.dart';
 import 'package:clothing_ecommerce/features/auth/view_models/sign_up_cubit/sign_up_cubit.dart';
@@ -20,6 +19,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final signUpCubit = BlocProvider.of<SignUpCubit>(context);
     return PopScope(
       canPop: false,
@@ -45,7 +45,7 @@ class _SignUpPageState extends State<SignUpPage> {
       },
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: AppColors.lightGrey3,
+        backgroundColor: colorScheme.tertiary,
         body: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: size.width * 0.08,
@@ -93,11 +93,11 @@ class _SignUpPageState extends State<SignUpPage> {
                     Text(
                       "Already have an account?",
                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        color: AppColors.black,
+                        color: colorScheme.secondary,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    Icon(Icons.arrow_forward, color: AppColors.primaryColor),
+                    Icon(Icons.arrow_forward, color: colorScheme.primary),
                   ],
                 ),
               ),
@@ -141,7 +141,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   Text(
                     "Or sign up with social account",
                     style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      color: AppColors.black,
+                      color: colorScheme.secondary,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -153,7 +153,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         height: size.height * 0.076,
                         width: size.width * 0.2,
                         decoration: BoxDecoration(
-                          color: AppColors.white,
+                          color: colorScheme.surface,
                           borderRadius: BorderRadius.circular(60),
                         ),
                         child: Padding(
@@ -166,7 +166,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         height: size.height * 0.076,
                         width: size.width * 0.2,
                         decoration: BoxDecoration(
-                          color: AppColors.white,
+                          color: colorScheme.surface,
                           borderRadius: BorderRadius.circular(60),
                         ),
                         child: Padding(

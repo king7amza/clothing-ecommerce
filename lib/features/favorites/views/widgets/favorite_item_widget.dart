@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clothing_ecommerce/core/common/common_models/clothes_response_model.dart';
-import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:clothing_ecommerce/features/favorites/view_models/favorites_cubit/favorites_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,6 +17,7 @@ class FavoriteItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.sizeOf(context);
     final favoriteItemDescription = favoriteItem.description;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return BlocProvider(
       create: (context) => FavoritesCubit(),
       child: Container(
@@ -25,11 +25,11 @@ class FavoriteItemWidget extends StatelessWidget {
         height: size.height * 0.17,
         width: double.infinity,
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: colorScheme.surface,
           borderRadius: BorderRadius.circular(size.height * 0.02),
-          boxShadow: const [
+          boxShadow: [
             BoxShadow(
-              color: AppColors.grey,
+              color: colorScheme.onSurfaceVariant,
               spreadRadius: 2,
               blurRadius: 6,
               offset: Offset(0, -1),
@@ -40,7 +40,7 @@ class FavoriteItemWidget extends StatelessWidget {
           children: [
             DecoratedBox(
               decoration: BoxDecoration(
-                color: AppColors.lightGrey3,
+                color: colorScheme.tertiary,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(size.height * 0.02),
                   bottomLeft: Radius.circular(size.height * 0.02),
@@ -79,28 +79,28 @@ class FavoriteItemWidget extends StatelessWidget {
                           builder: (context, state) {
                             if (state is RemovingFavoritesItem) {
                               return Center(
-                                child: const CircularProgressIndicator(
-                                  color: AppColors.primaryColor,
+                                child: CircularProgressIndicator(
+                                  color: colorScheme.primary,
                                 ),
                               );
                             } else if (state is FavoritesError) {
                               return Container(
                                 decoration: BoxDecoration(
-                                  color: AppColors.lightGrey2,
+                                  color: colorScheme.surfaceTint,
                                   shape: BoxShape.circle,
                                 ),
                                 child: IconButton(
                                   onPressed: () {},
-                                  icon: const Icon(
+                                  icon: Icon(
                                     Icons.error,
-                                    color: AppColors.primaryColor,
+                                    color: colorScheme.primary,
                                   ),
                                 ),
                               );
                             }
                             return Container(
                               decoration: BoxDecoration(
-                                color: AppColors.lightGrey2,
+                                color: colorScheme.surfaceTint,
                                 shape: BoxShape.circle,
                               ),
                               child: IconButton(
@@ -110,9 +110,9 @@ class FavoriteItemWidget extends StatelessWidget {
                                       .deleteFavoriteItem(favoriteItem);
                                   fetchFavoritesAfterRemoved();
                                 },
-                                icon: const Icon(
+                                icon: Icon(
                                   Icons.favorite,
-                                  color: AppColors.primaryColor,
+                                  color: colorScheme.primary,
                                 ),
                               ),
                             );
@@ -128,7 +128,7 @@ class FavoriteItemWidget extends StatelessWidget {
                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                         fontSize: size.height * 0.017,
                         fontWeight: FontWeight.w500,
-                        color: AppColors.grey,
+                        color: colorScheme.onSurfaceVariant,
                       ),
                     ),
                     SizedBox(height: size.height * 0.01),
@@ -143,7 +143,7 @@ class FavoriteItemWidget extends StatelessWidget {
                               .copyWith(
                                 fontSize: size.height * 0.017,
                                 fontWeight: FontWeight.w500,
-                                color: AppColors.black,
+                                color: colorScheme.secondary,
                               ),
                         ),
                         Text(
@@ -152,7 +152,7 @@ class FavoriteItemWidget extends StatelessWidget {
                               .copyWith(
                                 fontSize: size.height * 0.017,
                                 fontWeight: FontWeight.w500,
-                                color: AppColors.black,
+                                color: colorScheme.secondary,
                               ),
                         ),
                       ],

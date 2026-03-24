@@ -15,7 +15,7 @@ class AddToBagCubit extends Cubit<AddToBagState> {
     final String bagItemId = bagItem.product.id.toString();
     emit(AddToBagLoading());
     try {
-      await firestoreServices.setData(
+      await firestoreServices.setDocument(
         path: FirestoreApiPathes.bagItem(userId, bagItemId),
         data: bagItem.toMap(),
       );

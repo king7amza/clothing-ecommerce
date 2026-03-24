@@ -1,9 +1,8 @@
 import 'dart:math';
 
 import 'package:clothing_ecommerce/core/common/common_models/clothes_response_model.dart';
-import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:clothing_ecommerce/features/shop/view_models/shop_cubit/shop_cubit.dart';
-import 'package:clothing_ecommerce/features/shop/views/widgets/catalog_item_widget.dart';
+import 'package:clothing_ecommerce/features/shop/views/widgets/catalog_item_gridView_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -28,6 +27,7 @@ class _CatalogPageState extends State<CatalogPage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     final shopCubit = context.read<ShopCubit>();
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     int numberOfButtonsPerPage = ((size.width - 150) / 60).floor();
     Map<int, List<Products>> pageCache = {};
     List<Products>? currentPageData;
@@ -35,17 +35,17 @@ class _CatalogPageState extends State<CatalogPage> {
     int? totalNumberOfPages;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.lightGrey1,
+        backgroundColor: colorScheme.surfaceContainerHighest,
         title: Text(
           widget.categoryItemName,
           style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-            color: AppColors.black,
+            color: colorScheme.secondary,
             fontWeight: FontWeight.w500,
           ),
         ),
         centerTitle: true,
       ),
-      backgroundColor: AppColors.lightGrey1,
+      backgroundColor: colorScheme.surfaceContainerHighest,
       body: BlocBuilder<ShopCubit, ShopState>(
         bloc: shopCubit,
         buildWhen: (previous, current) =>
@@ -54,8 +54,8 @@ class _CatalogPageState extends State<CatalogPage> {
             current is FetchingProducts,
         builder: (context, state) {
           if (state is FetchingProducts) {
-            return const Center(
-              child: CircularProgressIndicator(color: AppColors.primaryColor),
+            return Center(
+              child: CircularProgressIndicator(color: colorScheme.primary),
             );
           } else if (state is ErrorFetchingProducts) {
             return Center(child: Text(state.errorMessage));
@@ -160,12 +160,12 @@ class _CatalogPageState extends State<CatalogPage> {
                                       },
                                       child: CircleAvatar(
                                         backgroundColor: currentPage == i
-                                            ? AppColors.primaryColor
-                                            : AppColors.grey,
+                                            ? colorScheme.primary
+                                            : colorScheme.onSurface,
                                         child: Text(
                                           "${i + 1}",
-                                          style: const TextStyle(
-                                            color: Colors.white,
+                                          style: TextStyle(
+                                            color: colorScheme.onPrimary,
                                           ),
                                         ),
                                       ),
@@ -220,7 +220,7 @@ class _CatalogPageState extends State<CatalogPage> {
                       ),
                     ),
                   if (currentPageData != null && currentPageData!.isNotEmpty)
-                    CatalogItemWidget(currentPageData: currentPageData),
+                    CatalogItemGridViewWidget(currentPageData: currentPageData),
                 ],
               ),
             );
@@ -229,7 +229,7 @@ class _CatalogPageState extends State<CatalogPage> {
             child: Container(
               width: 40,
               height: 40,
-              decoration: BoxDecoration(color: AppColors.primaryColor),
+              decoration: BoxDecoration(color: colorScheme.primary),
               child: Center(
                 child: Text(
                   "No products found",

@@ -1,4 +1,3 @@
-import 'package:clothing_ecommerce/core/utils/themes/app_colors.dart';
 import 'package:clothing_ecommerce/features/bag/view_models/shipping_locations_cubit/shipping_locations_cubit.dart';
 import 'package:clothing_ecommerce/features/bag/views/widgets/choose_address_method_widget.dart';
 import 'package:clothing_ecommerce/my_app.dart';
@@ -14,36 +13,28 @@ class ShippingAddressesPage extends StatefulWidget {
 
 class _ShippingAddressesPageState extends State<ShippingAddressesPage>
     with RouteAware {
-  // final TextEditingController nameController = TextEditingController();
-  // final TextEditingController addressController = TextEditingController();
-  // final TextEditingController cityController = TextEditingController();
-  // final TextEditingController stateController = TextEditingController();
-  // final TextEditingController countryController = TextEditingController();
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // اشترك في مراقبة الـ Route عشان تعرف متى ترجع الصفحة للظهور
     routeObserver.subscribe(this, ModalRoute.of(context)!);
   }
 
   @override
   void dispose() {
-    // مهم جداً: افصل الاشتراك عشان متحصلش على Memory Leak
     routeObserver.unsubscribe(this);
     super.dispose();
   }
 
-  // الدالة دي بتشتغل لما الصفحة تظهر تاني (بعد ما تعمل Pop من صفحة الخريطة)
   @override
   void didPopNext() {
     debugPrint("👋 صفحة العناوين رجعت للظهور! هجيب البيانات الجديدة.");
-    _loadData(); // استدعي دالة جلب البيانات هنا
+    _loadData();
   }
 
   @override
   void initState() {
     super.initState();
-    _loadData(); // جلب البيانات أول مرة عند الفتح
+    _loadData();
   }
 
   void _loadData() {
@@ -59,23 +50,25 @@ class _ShippingAddressesPageState extends State<ShippingAddressesPage>
     final Size size = MediaQuery.sizeOf(context);
     final ShippingLocationsCubit shippingLocationsCubit = context
         .read<ShippingLocationsCubit>();
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
           "Shipping Address",
           style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-            color: Colors.black,
+            color: colorScheme.secondary,
             fontWeight: FontWeight.bold,
           ),
         ),
         centerTitle: true,
-        backgroundColor: AppColors.white,
+        backgroundColor: colorScheme.surface,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back, color: colorScheme.onSurface),
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      backgroundColor: AppColors.lightGrey1,
+      backgroundColor: colorScheme.surfaceContainerHighest,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(
@@ -89,7 +82,7 @@ class _ShippingAddressesPageState extends State<ShippingAddressesPage>
               Text(
                 "Your Shipping Address",
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                  color: Colors.black,
+                  color: colorScheme.onSurface,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -103,17 +96,17 @@ class _ShippingAddressesPageState extends State<ShippingAddressesPage>
                 builder: (context, state) {
                   if (state is FetchingShippingLocations) {
                     return Center(
-                      child: const CircularProgressIndicator(
-                        color: AppColors.primaryColor,
+                      child: CircularProgressIndicator(
+                        color: colorScheme.primary,
                       ),
                     );
                   } else if (state is ShippingLocationsError) {
                     return Center(
                       child: Text(
                         state.errorMessage,
-                        style: Theme.of(
-                          context,
-                        ).textTheme.bodyMedium!.copyWith(color: Colors.red),
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: colorScheme.error,
+                        ),
                       ),
                     );
                   } else if (state is ShippingLocationsFetched) {
@@ -139,7 +132,7 @@ class _ShippingAddressesPageState extends State<ShippingAddressesPage>
                             ),
                             child: Container(
                               decoration: BoxDecoration(
-                                color: AppColors.white,
+                                color: colorScheme.surface,
                                 borderRadius: BorderRadius.circular(
                                   size.height * 0.02,
                                 ),
@@ -180,7 +173,8 @@ class _ShippingAddressesPageState extends State<ShippingAddressesPage>
                                                     .textTheme
                                                     .headlineSmall!
                                                     .copyWith(
-                                                      color: AppColors.black,
+                                                      color:
+                                                          colorScheme.onSurface,
                                                     ),
                                               ),
                                             ),
@@ -189,18 +183,24 @@ class _ShippingAddressesPageState extends State<ShippingAddressesPage>
                                         SizedBox(height: size.height * 0.01),
                                         Row(
                                           children: [
-                                            Container(
-                                              width: size.width * 0.07,
-                                              height: size.height * 0.04,
-                                              decoration: BoxDecoration(
-                                                color: AppColors.black,
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                              ),
-                                              child: Center(
-                                                child: Icon(
-                                                  Icons.check,
-                                                  color: Colors.white,
+                                            SizedBox(
+                                              width: size.width * 0.1,
+                                              height: size.height * 0.05,
+                                              child: AspectRatio(
+                                                aspectRatio: 1,
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    color: colorScheme.secondary,
+                                                    borderRadius:
+                                                        BorderRadius.circular(10),
+                                                  ),
+                                                  child: Center(
+                                                    child: Icon(
+                                                      Icons.check,
+                                                      color:
+                                                          colorScheme.onSecondary,
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -211,7 +211,9 @@ class _ShippingAddressesPageState extends State<ShippingAddressesPage>
                                                   .textTheme
                                                   .headlineSmall!
                                                   .copyWith(
-                                                    color: AppColors.black,
+                                                    color:
+                                                        colorScheme.onSurface,
+                                                    fontSize: size.width * 0.055,
                                                   ),
                                             ),
                                           ],
@@ -242,7 +244,7 @@ class _ShippingAddressesPageState extends State<ShippingAddressesPage>
                   onTap: () {
                     showModalBottomSheet(
                       context: context,
-                      backgroundColor: AppColors.lightGrey1,
+                      backgroundColor: colorScheme.surfaceContainerHighest,
                       constraints: BoxConstraints(
                         maxHeight: MediaQuery.of(context).size.height * 0.7,
                       ),
@@ -261,7 +263,7 @@ class _ShippingAddressesPageState extends State<ShippingAddressesPage>
                                   width: size.width * 0.15,
                                   height: size.height * 0.008,
                                   decoration: BoxDecoration(
-                                    color: AppColors.grey,
+                                    color: colorScheme.onSurfaceVariant,
                                     borderRadius: BorderRadius.circular(
                                       size.height * 0.004,
                                     ),
@@ -306,13 +308,13 @@ class _ShippingAddressesPageState extends State<ShippingAddressesPage>
                   child: Container(
                     padding: EdgeInsets.all(size.height * 0.025),
                     decoration: BoxDecoration(
-                      color: AppColors.black,
+                      color: colorScheme.secondary,
                       borderRadius: BorderRadius.circular(size.height * 0.07),
                     ),
                     child: Center(
                       child: Icon(
                         Icons.add,
-                        color: AppColors.white,
+                        color: colorScheme.surface,
                         size: size.height * 0.04,
                       ),
                     ),

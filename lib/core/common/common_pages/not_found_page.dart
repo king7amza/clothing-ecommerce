@@ -6,13 +6,14 @@ class NotFoundPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       backgroundColor: AppColors.lightGrey3,
       body: Center(
         child: Text(
           'Error Not Found',
           style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-            color: AppColors.primaryColor,
+            color: colorScheme.primary,
             fontWeight: FontWeight.bold,
           ),
         ),
